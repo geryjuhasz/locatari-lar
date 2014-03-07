@@ -1,0 +1,34 @@
+@extends('layout')
+@section('content')
+
+<h2>Administrare blocuri</h2>
+<div class="pull-right">
+	<a href="{{ URL::action('BlocsController@create') }}" class="btn btn-default">Adauga bloc</a>
+</div>
+
+<table class="table table-striped table-hover">
+	<thead>
+		<tr>
+			<th>Denumire</th>
+			<th>Asociatie</th>
+                        <th></th>
+			<th></th>
+		</tr>
+		<tbody>
+			@foreach($bloc as $bbloc)
+			<tr>
+				<td>{{ $bbloc->denumire }}</td>
+                                <td>{{ $bbloc->asociatie_id ? $bbloc->asociatie->denumire : ''}}
+                                </td>
+				<td><a href="{{ URL::action('BlocsController@edit', $bbloc->id) }}">Edit</a></td>
+				<td>
+					{{ Form::open(array('action' => array('BlocsController@destroy', $bbloc->id), 'method' => 'delete')) }}
+						<button type="submit" class="btn-link btn-confirm-submit">Delete</button>
+					{{ Form::close() }}
+				</td>
+			</tr>
+			@endforeach
+		</tbody>
+	</thead>
+</table>
+@stop
