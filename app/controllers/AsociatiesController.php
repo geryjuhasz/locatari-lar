@@ -9,7 +9,7 @@ class AsociatiesController extends BaseController {
 	 */
 	public function index()
 	{
-        return View::make('asociaties.index')->with('asociatie', Asociatie::all());
+            return View::make('asociaties.index')->with('asociatie', Asociatie::all());
 	}
 
 	/**
@@ -19,7 +19,7 @@ class AsociatiesController extends BaseController {
 	 */
 	public function create()
 	{
-        $this->layout->content = View::make('asociaties.create');
+            $this->layout->content = View::make('asociaties.create');
 	}
 
 	/**
@@ -87,7 +87,9 @@ class AsociatiesController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+                Asociatie::find($id)->delete();
+		return Redirect::action('AsociatiesController@index')->with('flash_warning', "Asociatia a fost stearsa.");
 	}
 
+       
 }

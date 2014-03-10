@@ -86,7 +86,8 @@ Route::filter('nav', function() {
 		View::share('nav_left', array(
 			'Asociatie' => URL::Action('AsociatiesController@index'),
 			'Bloc' => URL::action('BlocsController@index'),
-			
+                        'Scara' => URL::action('ScarasController@index'),
+                        'Locatari' => URL::action('LocatarisController@index')
 		));
 //	} else if(Auth::user()->type == 'admin') {
 //		View::share('nav_left', array(

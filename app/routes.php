@@ -17,10 +17,19 @@ Route::get('/', function()
 });
 
 
-
-
 Route::group(array('before' => 'backend_auth|nav'), function() {
 	Route::resource('blocs', 'BlocsController');
         Route::resource('asociaties', 'AsociatiesController');
-	
+	Route::resource('scaras', 'ScarasController');
+        Route::resource('locataris', 'LocatarisController');
+        Route::resource('calcul_asociaties', 'Calcul_asociatiesController');
+        Route::resource('consums', 'ConsumsController');
+        Route::resource('cheltuielis', 'CheltuielisController');
+        Route::resource('cost_locataris', 'Cost_locatarisController');
+
 });
+
+
+
+
+

@@ -21,6 +21,13 @@ class DatabaseSeeder extends Seeder {
 		$this->call('TipincapereTableSeeder');
 		$this->call('TiprepartitieTableSeeder');
 		$this->call('AsociatiesTableSeeder');
+		$this->call('ScarasTableSeeder');
+		$this->call('LocatarisTableSeeder');
+		$this->call('Calcul_asociatiesTableSeeder');
+		$this->call('ConsumsTableSeeder');
+		$this->call('CeltuielisTableSeeder');
+		$this->call('CheltuielisTableSeeder');
+		$this->call('Cost_locatarisTableSeeder');
 	}
 
 }

@@ -12,6 +12,7 @@
 			<th>Denumire</th>
 			<th>Administrator</th>
                         <th></th>
+                        <th></th>
 			<th></th>
 		</tr>
 		<tbody>
@@ -19,10 +20,12 @@
 			<tr>
 				<td>{{ $aasociatie->denumire }}</td>
                                 <td>{{ $aasociatie->administrator }}</td>
-				<td><a href="{{ URL::action('AsociatiesController@edit', $aasociatie->id) }}">Edit</a></td>
-				<td>
+				<td><a href="{{ URL::action('AsociatiesController@edit', $aasociatie->id) }}">Editeaza</a></td>
+				<td><a href="{{ URL::action('Calcul_asociatiesController@edit', $aasociatie->id) }}">Setari</a></td>
+                                <td><a href="{{ URL::action('BlocsController@index', array('asociatie_id' => $aasociatie->id)) }}">Blocuri</a></td>
+                                <td>
 					{{ Form::open(array('action' => array('AsociatiesController@destroy', $aasociatie->id), 'method' => 'delete')) }}
-						<button type="submit" class="btn-link btn-confirm-submit">Delete</button>
+						<button type="submit" class="btn-link btn-confirm-submit">Sterge</button>
 					{{ Form::close() }}
 				</td>
 			</tr>

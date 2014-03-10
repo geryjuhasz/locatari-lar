@@ -21,7 +21,8 @@
                                 <td>{{ $bbloc->asociatie_id ? $bbloc->asociatie->denumire : ''}}
                                 </td>
 				<td><a href="{{ URL::action('BlocsController@edit', $bbloc->id) }}">Edit</a></td>
-				<td>
+				<td><a href="{{ URL::action('ScarasController@index', array('bloc_id' => $bbloc->id)) }}">Scari</a></td>
+                                <td>
 					{{ Form::open(array('action' => array('BlocsController@destroy', $bbloc->id), 'method' => 'delete')) }}
 						<button type="submit" class="btn-link btn-confirm-submit">Delete</button>
 					{{ Form::close() }}
