@@ -109,3 +109,15 @@ Route::filter('nav', function() {
 	View::share('nav_left_active', '');
 	View::share('nav_top_active', '');
 });
+
+Route::filter('backend_auth', function() {
+    
+        if (Auth::guest()) {
+            //Save requested URL in order to redirect afterwards
+            Session::put('redir_url', URL::current());
+                return Redirect::action('AdminsController@login');
+        }
+	if(!Auth::check()) {
+		return Redirect::action('AdminsController@login');
+	}
+});

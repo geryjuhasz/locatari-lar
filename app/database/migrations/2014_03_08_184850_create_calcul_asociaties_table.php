@@ -14,7 +14,7 @@ class CreateCalculAsociatiesTable extends Migration {
 	{
 		Schema::create('calcul_asociaties', function(Blueprint $table) {
 			$table->increments('id');
-			$table->integeredit('asociatie_id');
+			$table->integer('asociatie_id');
 			$table->timestamps();
 		});
 	}
