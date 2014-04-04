@@ -9,6 +9,17 @@ if(!empty($calculasociatie)) {
 	$calculasociatie = new Calcul_asociatie();
         $header = "Creaza setari asociatie";
 }
+
+if(Input::get('asociatie_id')) {
+    $asociatie_id = Input::get('asociatie_id');
+    Session::put('asociatie_id', $asociatie_id);
+} else if(Session::get('asociatie_id')) {
+    $asociatie_id = Session::get('asociatie_id');
+} else {
+    $asociatie_id = '0';
+}
+$asociatie = $asociatie_id!='0' ? Asociatie::where('id', '=', $asociatie_id)->lists('denumire', 'id') : Asociatie::lists('denumire', 'id');
+ 
 $tipcheltuieli = Tipcheltuieli::lists('denumire', 'id');
 $tipcalculrepartitie = Tipcalculrepartitie::lists('denumire', 'id');
 $tiprepartitie = Tiprepartitie::lists('denumire', 'id');
@@ -18,6 +29,9 @@ $tiprepartitie = Tiprepartitie::lists('denumire', 'id');
 <div class="col-4">
 	<h3>{{ $header }}</h3>
 	{{ Form::open(array('action' => $action, 'method' => $method)) }}
+                {{ Form::label('asociatie_id', 'Asociatie: ', array('class' => 'form-label')) }}
+                {{ Form::select('asociatie_id', $asociatie, Input::old('asociatie_id'), array('class' => 'form-control width-200')) }}
+
 		{{ Form::label('tipcheltuieli_id', 'Tip cheltuieli: ', array('class' => 'form-label')) }}
                 {{ Form::select('tipcheltuieli_id', $tipcheltuieli, Input::old('tipcheltuieli_id'), array('class' => 'form-control width-200')) }}
 

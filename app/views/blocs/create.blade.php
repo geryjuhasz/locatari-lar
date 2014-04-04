@@ -9,7 +9,17 @@ if(!empty($bloc)) {
 	$bloc = new Bloc();
         $header = "Creaza bloc";
 }
-$asociatie = Asociatie::lists('denumire', 'id');
+
+if(Input::get('asociatie_id')) {
+    $asociatie_id = Input::get('asociatie_id');
+    Session::put('asociatie_id', $asociatie_id);
+} else if(Session::get('asociatie_id')) {
+    $asociatie_id = Session::get('asociatie_id');
+} else {
+    $asociatie_id = '0';
+}
+$asociatie = $asociatie_id!='0' ? Asociatie::where('id', '=', $asociatie_id)->lists('denumire', 'id') : Asociatie::lists('denumire', 'id');
+        
 ?>
 @section('content')
 <div class="col-4">

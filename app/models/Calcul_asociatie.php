@@ -9,4 +9,10 @@ class Calcul_asociatie extends Eloquent {
         public function Tipcheltuieli() {
 		return $this->belongsTo('Tipcheltuieli', 'tipcheltuieli_id');
 	}
+        public function Tipcalculrepartitie() {
+		return $this->belongsTo('Tipcalculrepartitie', 'tipcalculrepartitie_id');
+        }
+         public function Tiprepartitie() {
+		return $this->belongsTo('Tiprepartitie', 'tiprepartitie_id');
+        }
 }

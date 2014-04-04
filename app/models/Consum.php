@@ -5,4 +5,10 @@ class Consum extends Eloquent {
         protected $table = 'consum';
 
 	public static $rules = array();
+        
+        public function locatari() {
+		return $this->belongsTo('Locatari', 'locatar_id');
+	}
+        
+        
 }

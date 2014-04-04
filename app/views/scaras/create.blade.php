@@ -9,7 +9,17 @@ if(!empty($scara)) {
 	$scara = new Scara();
         $header = "Creaza scara";
 }
-$bloc = Bloc::lists('denumire', 'id');
+if(Input::get('bloc_id')) {
+    $bloc_id = Input::get('bloc_id');
+    Session::put('bloc_id', $bloc_id);
+} else if(Session::get('bloc_id')) {
+    $bloc_id = Session::get('bloc_id');
+} else {
+    $bloc_id = '0';
+}
+//$bloc = Bloc::where('asociatie_id', '=', $asociatie_id )->get();
+$bloc = $bloc_id!='0' ? Bloc::where('id', '=', $bloc_id)->lists('denumire', 'id'): Bloc::lists('denumire', 'id');
+
 ?>
 @section('content')
 <div class="col-4">

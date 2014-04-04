@@ -9,7 +9,20 @@ class Calcul_asociatiesController extends BaseController {
 	 */
 	public function index()
 	{
-        return View::make('calcul_asociaties.index');
+            if(Input::get('asociatie_id')) {
+		$asociatie_id = Input::get('asociatie_id');
+		Session::put('asociatie_id', $asociatie_id);
+            } else if(Session::get('asociatie_id')) {
+		$asociatie_id = Session::get('asociatie_id');
+            } else {
+		$asociatie_id = '0';
+            }
+            
+            //$bloc = Bloc::where('asociatie_id', '=', $asociatie_id )->get();
+            $calcul = $asociatie_id!='0' ? Calcul_asociatie::where('asociatie_id', '=', $asociatie_id)->get(): Calcul_asociatie::all();;
+            $this->layout->content = View::make('calcul_asociaties.index')
+			->with('calcul', $calcul)
+			->with('asociatie_id', $asociatie_id);
 	}
 
 	/**
@@ -19,7 +32,17 @@ class Calcul_asociatiesController extends BaseController {
 	 */
 	public function create()
 	{
-        return View::make('calcul_asociaties.create');
+             if(Input::get('asociatie_id')) {
+		$asociatie_id = Input::get('asociatie_id');
+		Session::put('asociatie_id', $asociatie_id);
+            } else if(Session::get('asociatie_id')) {
+		$asociatie_id = Session::get('asociatie_id');
+            } else {
+		$asociatie_id = '0';
+            }
+            
+            $this->layout->content = View::make('calcul_asociaties.create')
+                    ->with('asociatie_id', $asociatie_id);
 	}
 
 	/**
@@ -35,7 +58,7 @@ class Calcul_asociatiesController extends BaseController {
                 
 		$calculasociatie->save();
 		
-		return Redirect::action('AsociatiesController@index')->with('flash_success', "Calcul salvat.");
+		return Redirect::action('Calcul_asociatiesController@index')->with('flash_success', "Calcul salvat.");
 	}
 
 	/**
@@ -73,12 +96,11 @@ class Calcul_asociatiesController extends BaseController {
 	public function update($id)
 	{
 		$input = Input::all();
-		$calculasociatie = new Calcul_asociatie();
+		$calculasociatie = Calcul_asociatie::find($id);
 		$calculasociatie->fill($input);
-                
 		$calculasociatie->save();
 		
-		return Redirect::action('AsociatiesController@index')->with('flash_success', "Calcul salvat.");
+		return Redirect::action('Calcul_asociatiesController@index')->with('flash_success', "Calcul salvat.");
 	}
 
 	/**
@@ -89,7 +111,8 @@ class Calcul_asociatiesController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		Calcul_asociatie::find($id)->delete();
+		return Redirect::action('Calcul_asociatiesController@index')->with('flash_warning', "Calcul sters.");
 	}
 
 }

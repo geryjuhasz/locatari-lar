@@ -9,6 +9,7 @@ class AsociatiesController extends BaseController {
 	 */
 	public function index()
 	{
+            Session::forget('asociatie_id');
             return View::make('asociaties.index')->with('asociatie', Asociatie::all());
 	}
 

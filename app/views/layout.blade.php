@@ -4,6 +4,7 @@
 		{{ HTML::style('css/general.css') }}
 		{{ HTML::style('css/main.css') }}
 		{{ HTML::style('css/jquery-ui/jquery-ui-1.10.3.custom.css') }}
+                {{ HTML::style('css/datepicker.css') }}
 		
 		{{ HTML::script('packages/tinymce/tinymce.min.js') }}
 		{{-- HTML::script('packages/ckeditor/ckeditor.js') --}}
@@ -11,6 +12,7 @@
 		{{ HTML::script('js/jquery-ui.custom.js') }}
 		{{ HTML::script('packages/bootstrap/js/bootstrap.js') }}
 		{{ HTML::script('js/main.js') }}
+                {{ HTML::script('js/bootstrap-datepicker.js') }}
 		<script>
 			urls = {
 				adsController: '{{ URL::to("ads") }}',

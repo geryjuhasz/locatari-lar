@@ -1,7 +1,7 @@
 <?php
 
 class CheltuielisController extends BaseController {
-
+        protected $layout = 'layout';
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -9,7 +9,22 @@ class CheltuielisController extends BaseController {
 	 */
 	public function index()
 	{
-        return View::make('cheltuielis.index');
+            Session::forget('asociatie_id');
+            if(Input::get('asociatie_id')) {
+		$asociatie_id = Input::get('asociatie_id');
+		Session::put('asociatie_id', $asociatie_id);
+            } else if(Session::get('asociatie_id')) {
+		$asociatie_id = Session::get('asociatie_id');
+            } else {
+		$asociatie_id = '0';
+            }
+            
+            //$bloc = Bloc::where('asociatie_id', '=', $asociatie_id )->get();
+            $cheltuieli = $asociatie_id!='0' ? Cheltuieli::where('asociatie_id', '=', $asociatie_id)->get(): array();
+            $this->layout->content = View::make('cheltuielis.index')
+			->with('cheltuieli', $cheltuieli);
+			//->with('asociatie_id', $asociatie_id);
+            //return View::make('cheltuielis.index');
 	}
 
 	/**
@@ -19,7 +34,7 @@ class CheltuielisController extends BaseController {
 	 */
 	public function create()
 	{
-        return View::make('cheltuielis.create');
+            $this->layout->content = View::make('cheltuielis.create');
 	}
 
 	/**
@@ -29,7 +44,18 @@ class CheltuielisController extends BaseController {
 	 */
 	public function store()
 	{
-		//
+		$input = Input::all();
+		//$validator = Validator::make($input, array(
+		//	'denumire' => 'required',
+		//	'asociatie_id' => 'required|exists:asociatie,id'
+		//));
+		//if($validator->fails()) return Redirect::action('BlocsController@create')->with('flash_error', $validator->messages());
+		$cheltuieli = new Cheltuieli();
+		$cheltuieli->fill($input);
+		$cheltuieli->save();
+		
+		return Redirect::action('CheltuielisController@index')->with('flash_success', "Cheltuiala  a fost salvata.");
+                
 	}
 
 	/**
@@ -51,7 +77,12 @@ class CheltuielisController extends BaseController {
 	 */
 	public function edit($id)
 	{
-        return View::make('cheltuielis.edit');
+            if(!Cheltuieli::find($id)) {
+			return Redirect::action('CheltuielisController@index');
+		}
+		$this->layout->content = View::make('cheltuielis.create')
+			->with('cheltuieli', Cheltuieli::find($id));
+            //return View::make('cheltuielis.create');
 	}
 
 	/**
@@ -62,7 +93,12 @@ class CheltuielisController extends BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$input = Input::all();
+		$cheltuieli = Cheltuieli::find($id);
+		$cheltuieli->fill($input);
+		$cheltuieli->save();
+		return Redirect::action('CheltuielisController@index')
+			->with('flash_info', "Cheltuieli salvate.");
 	}
 
 	/**

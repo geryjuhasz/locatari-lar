@@ -9,7 +9,18 @@ if(!empty($locatari)) {
 	$locatari = new Locatari();
         $header = "Creaza locatar";
 }
-$scara = Scara::lists('denumire', 'id');
+
+if(Input::get('scara_id')) {
+    $scara_id = Input::get('scara_id');
+    Session::put('scara_id', $scara_id);
+} else if(Session::get('scara_id')) {
+    $scara_id = Session::get('scara_id');
+} else {
+    $scara_id = '0';
+}
+//$bloc = Bloc::where('asociatie_id', '=', $asociatie_id )->get();
+$scara = $scara_id!='0' ? Scara::where('id', '=', $scara_id)->lists('denumire', 'id'): Scara::lists('denumire', 'id');
+
 ?>
 @section('content')
 <div class="col-4">

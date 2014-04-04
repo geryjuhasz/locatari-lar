@@ -9,4 +9,9 @@ class Scara extends Eloquent {
         public function bloc() {
 		return $this->belongsTo('Bloc', 'bloc_id');
 	}
+        
+        public function locatari() {
+            return $this->hasMany('Locatari');
+        }
+               
 }

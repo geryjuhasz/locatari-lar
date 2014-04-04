@@ -82,30 +82,29 @@ Route::filter('csrf', function()
 
 
 Route::filter('nav', function() {
-	//if(Auth::user()->type == 'super') {
+	if(Auth::user()->type == 'super') {
 		View::share('nav_left', array(
-			'Asociatie' => URL::Action('AsociatiesController@index'),
-			'Bloc' => URL::action('BlocsController@index'),
-                        'Scara' => URL::action('ScarasController@index'),
-                        'Locatari' => URL::action('LocatarisController@index')
+			'Asociatii' => URL::Action('AsociatiesController@index'),
+                        'Cheltuieli' => URL::Action('CheltuielisController@index'),
+                        'Consum' => URL::Action('ConsumsController@index'),
+                        'Admins' => URL::action('AdminsController@index'),
+                        'Logout' => URL::action('AdminsController@logout')
 		));
-//	} else if(Auth::user()->type == 'admin') {
-//		View::share('nav_left', array(
-//			'Content' => URL::Action('ArticlesController@index'),
-//			'Categories' => URL::action('CategoriesController@index'),
-//			'Ads' => URL::action('AdsController@index'),
-//			'Users' => URL::action('UsersController@index'),
-//			'Admins' => URL::action('AdminsController@index'),
-//			'Logout' => URL::action('AdminsController@logout')
-//		));
-//	} else {
-//		View::share('nav_left', array(
-//			'Categories' => URL::action('CategoriesController@index'),
-//			'Ads' => URL::action('AdsController@index'),
-//			'Users' => URL::action('UsersController@index'),
-//			'Logout' => URL::action('AdminsController@logout')
-//		));
-//	}
+	} else if(Auth::user()->type == 'admin') {
+		View::share('nav_left', array(
+                        'Asociatii' => URL::Action('AsociatiesController@index'),
+                        'Cheltuieli' => URL::Action('CheltuielisController@index'),
+                        'Consum' => URL::Action('ConsumsController@index'),
+			'Logout' => URL::action('AdminsController@logout')
+		));
+	} else {
+        	View::share('nav_left', array(
+                        'Asociatii' => URL::Action('AsociatiesController@index'),
+                        'Cheltuieli' => URL::Action('CheltuielisController@index'),
+                        'Consum' => URL::Action('ConsumsController@index'),
+			'Logout' => URL::action('AdminsController@logout')
+		));
+	}
 	View::share('nav_left_active', '');
 	View::share('nav_top_active', '');
 });
