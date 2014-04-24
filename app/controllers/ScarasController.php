@@ -9,14 +9,7 @@ class ScarasController extends BaseController {
 	 */
 	public function index()
 	{
-            if(Input::get('bloc_id')) {
-		$bloc_id = Input::get('bloc_id');
-		Session::put('bloc_id', $bloc_id);
-            } else if(Session::get('bloc_id')) {
-		$bloc_id = Session::get('bloc_id');
-            } else {
-		$bloc_id = '0';
-            }
+            $bloc_id = getInputOrSession('bloc_id');
             //$bloc = Bloc::where('asociatie_id', '=', $asociatie_id )->get();
             $scara = $bloc_id!='0' ? Scara::where('bloc_id', '=', $bloc_id)->get(): Scara::all();
 

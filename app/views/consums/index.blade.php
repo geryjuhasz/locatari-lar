@@ -1,45 +1,24 @@
 @extends('layout')
 @section('content')
 <?php
-if(Input::get('asociatie_id')) {
-    $asociatie_id = Input::get('asociatie_id');
-    Session::put('asociatie_id', $asociatie_id);
-} else if(Session::get('asociatie_id')) {
-    $asociatie_id = Session::get('asociatie_id');
-} else {
-    $asociatie_id = '0';
-}
 
-if(Input::get('bloc_id')) {
-    $bloc_id = Input::get('bloc_id');
-    Session::put('bloc_id', $bloc_id);
-    $asociatie_id = Bloc::find($bloc_id)->asociatie->id;
-} else if(Session::get('bloc_id')) {
-    $bloc_id = Session::get('bloc_id');
-} else {    
-    $bloc_id = '0';
-}
+$asociatie_id = getInputOrSession('asociatie_id');
+$bloc_id = getInputOrSession('bloc_id');
+$scara_id = getInputOrSession('scara_id');
+$tipconsum_id = getInputOrSession('tipconsum_id');
 
-if(Input::get('scara_id')) {
-    $scara_id = Input::get('scara_id');
-    Session::put('scara_id', $scara_id);
-    $bloc_id = Scara::find($scara_id)->bloc->id;
-    $asociatie_id = Bloc::find($bloc_id)->asociatie->id;
-} else if(Session::get('scara_id')) {
-    $scara_id = Session::get('scara_id');
-} else {    
-    $scara_id = '0';
-}
-
-$asociatie = Asociatie::all();
 $bloc = Bloc::where('asociatie_id', '=', $asociatie_id)->get();
 $scara = Scara::where('bloc_id', '=', $bloc_id)->get();
-        //$asociatie_id!='0' ? Asociatie::where('id', '=', $asociatie_id)->get() : Asociatie::all();
+$tipconsum = Tipconsum::all();
+
+$locatari = $consum['Locatari'];
+if($consum['Consum']!=null) $consums = $consum['Consum'];
+else $consums = array();
+
 ?>
 <h2>Consum asociatie:</h2>
 
 <div class="col-3">
-	{{ Form::selectModel($asociatie, 'denumire', $asociatie_id, 'asociatie_id', array('class' => 'page-specifier form-control'), 'Alege asociatie') }}
         {{ Form::selectModel($bloc, 'denumire', $bloc_id, 'bloc_id', array('class' => 'page-specifier form-control'), 'Alege bloc') }}
         {{ Form::selectModel($scara, 'denumire', $scara_id, 'scara_id', array('class' => 'page-specifier form-control'), 'Alege scara') }}
 </div>
@@ -49,6 +28,10 @@ $scara = Scara::where('bloc_id', '=', $bloc_id)->get();
         {{ Form::submit('Afiseaza', array('class' => 'btn btn-default')) }}
 </div>
 
+<div class="col-3">
+        {{ Form::selectModel($tipconsum, 'denumire', $tipconsum_id, 'tipconsum_id', array('class' => 'page-specifier form-control'), 'Alege consum') }}
+</div>
+
 <div class="pull-right">
 	<a href="{{ URL::action('CheltuielisController@create') }}" class="btn btn-default">Introdu consum</a>
 </div>
@@ -56,27 +39,41 @@ $scara = Scara::where('bloc_id', '=', $bloc_id)->get();
 <table class="table table-striped table-hover">
 	<thead>
 		<tr>
-                    <th>Nr.apartament</th>	
-                    <th>Locatar</th>
-                    <th>Incapere</th>
-                    <th>Index vechi</th>
-                    <th>Index nou</th>
-                    <th>Consum</th>
-                    <th></th>
+                    <th width='20px'>Nr.apartament</th>	
+                    <th width='50px'>Locatari</th>
+                    <th colspan="{{ count($consums) }}">Consum</th>
+                    <th>Editare</th>
+                    
+		</tr>
+                <tr>
+                    <th colspan="2"></th>	
+                    @foreach($consums as $cconsum)
+                        <th colspan="2">{{ $cconsum['Name'] }}</th>
+                    @endforeach
+
                     <th></th>
 		</tr>
 		<tbody>
-			@foreach($consum as $cconsum)
+			@foreach($locatari as $locatar)
 			<tr>
-                            <td>{{ $cconsum->nr_apartament }}</td>	
-                            <td>{{ $cconsum->nume }}</td>
-                            <td>{{ $cconsum->tipincapere_id }}</td>                                
-                            <td>{{ $cconsum->index_vechi }}</td>
-                            <td>{{ $cconsum->index_nou }}</td>
-                            <td>{{ $cconsum->index_nou-$cconsum->index_vechi }}</td>
-                            <td><a href="{{ URL::action('ConsumsController@edit', $cconsum->id) }}" target='_blank'>Edit</a></td>
-                            <td></td>
-			</tr>
+                            <td>{{ $locatar->nr_apartament }}</td>	
+                            <td>{{ $locatar->nume }}</td>
+                            <?php
+                            foreach ($consums as $c1) {
+                                $c2 = $c1['Consum']; 
+                                foreach ($c2 as $c3) {
+                                    if ($c3->nr_apartament == $locatar->nr_apartament) {
+                                        ?>
+                                        <td>Rece {{ $c3->index_vechi_rece }} => {{ $c3->index_nou_rece }} => {{ $c3->index_nou_rece - $c3->index_vechi_rece }}</td>
+                                        <td>Calda {{ $c3->index_vechi_calda }} => {{ $c3->index_nou_calda }} => {{ $c3->index_nou_calda - $c3->index_vechi_calda }}</td>
+                                        <?php
+                                    }  
+                                }
+                            }
+                            ?>
+                            <td><a href="{{ URL::action('ConsumsController@edit', $locatar->id) }}" target='_blank'>Edit</a></td>
+                        </tr>
+                        
 			@endforeach
 		</tbody>
 	</thead>

@@ -9,39 +9,57 @@ class ConsumsController extends BaseController {
 	 */
 	public function index()
 	{
-            //Session::flush();
-            if(Input::get('scara_id')) {
-		$scara_id = Input::get('scara_id');
-		Session::put('scara_id', $scara_id);
-            } else if(Session::get('scara_id')) {
-		$scara_id = Session::get('scara_id');
-            } else {
-		$scara_id = '0';
-            }
+            $asociatie_id = getInputOrSession('asociatie_id');
+            $asociatie = Asociatie::Find($asociatie_id); 
+            $scara_id = getInputOrSession('scara_id');
+            $luna = Session::get('luna');
+            $tipconsum_id = getInputOrSession('tipconsum_id');
             
-            if(Input::get('luna')) {
-		$luna = Input::get('luna');
-		Session::put('luna', $luna);
-            } else if(Session::get('luna')) {
-		$luna = Session::get('luna');
-            } else {
-		$luna = '0';
-            }
-            
-            //$bloc = Bloc::where('asociatie_id', '=', $asociatie_id )->get();
-            //$consum = $asociatie_id!='0' ? Consum::where('asociatie_id', '=', $asociatie_id)->get(): array();
             if ($scara_id != 0) $locatari = Scara::find($scara_id)->locatari;
             else $locatari = Locatari::all();
+            $consum['Locatari'] = $locatari;
+     
             
-            $query = Locatari::query()->leftjoin('consum', 'consum.locatari_id', '=', 'locatari.id');
-            $query = $query->leftjoin('scara', 'scara.id', '=', 'locatari.scara_id');
-            $query = $query->where('scara.id', '=', $scara_id);
-            //$query = $query->where('consum.luna', '=', '2014-01-01');
-            $query = $query->select('locatari.nume', 'locatari.nr_apartament', 'consum.tipincapere_id', 'consum.index_vechi', 'consum.index_nou');
-            $consum = $query->get();
+            
+            //get locatari data without consum
+//            $query = Locatari::query()->leftjoin('scara', 'scara.id', '=', 'locatari.scara_id');
+//            $query = $query->where('scara.id', '=', $scara_id);
+//            $query = $query->select('locatari.nume', 'locatari.nr_apartament');
+//            $consum['Locatari'] = $locatari;
+
+            //die();
+            //$a = Asociatie_consum::find($asociatie_id);
+
+            $asociatie_consum = Asociatie_consum::where('asociatie_id', '=', $asociatie_id)
+                ->where('tipconsum_id', '=',$tipconsum_id )
+            ->get();
+            
+            $consum['Consum'] = null;
+            foreach ($asociatie_consum as $aconsum) {
+                $query = Locatari::query()->leftjoin('scara', 'scara.id', '=', 'locatari.scara_id');
+                $query = $query->where('scara.id', '=', $scara_id);
+
+                $query = $query->leftjoin('consum', 'consum.locatari_id', '=', 'locatari.id');
+                $query = $query->where('consum.luna', '=', '2014-01-01');
+                $query = $query->where('consum.tipconsum_id', '=', $tipconsum_id);
+                $query = $query->where('consum.tipincapere_id', '=', $aconsum->tipincapere->id);
+                $query = $query->select('locatari.nume', 'locatari.nr_apartament', 'consum.index_vechi_rece', 'consum.index_nou_rece', 'consum.index_vechi_calda', 'consum.index_nou_calda');
+                $cons['Name']=$aconsum->tipincapere->denumire;
+                $cons['Consum'] = $query->get();
+                $consum['Consum'][] = $cons;
+            }
+            
+            //$a = $consum['Consum'][0]['Consum'][0];
+            //var_dump($a);die();
+            //foreach($a as $b)
+            //{
+            //   var_dump($b->nr_incapere);die();
+            //}
+            //$query = $queryconsum;
             $this->layout->content = View::make('consums.index')
 			->with('consum', $consum)
-			->with('luna', $luna);
+			->with('luna', $luna)
+                        ->with('asociatie', $asociatie);
 	}
 
 	/**

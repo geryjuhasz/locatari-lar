@@ -7,8 +7,11 @@ class Consum extends Eloquent {
 	public static $rules = array();
         
         public function locatari() {
-		return $this->belongsTo('Locatari', 'locatar_id');
+		return $this->belongsTo('locatari', 'locatar_id');
 	}
         
+        public function tipincapere() {
+		return $this->belongsTo('tipincapere', 'tipincapere_id');
+	}
         
 }

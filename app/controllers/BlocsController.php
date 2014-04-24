@@ -9,15 +9,7 @@ class BlocsController extends BaseController {
 	 */
 	public function index()
 	{
-            if(Input::get('asociatie_id')) {
-		$asociatie_id = Input::get('asociatie_id');
-		Session::put('asociatie_id', $asociatie_id);
-            } else if(Session::get('asociatie_id')) {
-		$asociatie_id = Session::get('asociatie_id');
-            } else {
-		$asociatie_id = '0';
-            }
-            
+            $asociatie_id = getInputOrSession('asociatie_id');
             //$bloc = Bloc::where('asociatie_id', '=', $asociatie_id )->get();
             $bloc = $asociatie_id!='0' ? Bloc::where('asociatie_id', '=', $asociatie_id)->get(): Bloc::all();
             $this->layout->content = View::make('blocs.index')

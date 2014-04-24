@@ -26,10 +26,12 @@ Route::group(array('before' => 'backend_auth|nav'), function() {
         Route::resource('consums', 'ConsumsController');
         Route::resource('cheltuielis', 'CheltuielisController');
         Route::resource('cost_locataris', 'Cost_locatarisController');
-        
+        Route::resource('asociatie_consums', 'Asociatie_consumsController');
+
         Route::get('logout_admin', 'AdminsController@logout');
 
 });
 
 Route::get('login_admin', array('as' => 'login', 'uses' => 'AdminsController@loginForm'));
 Route::post('login_admin', array('as' => 'login', 'uses' => 'AdminsController@login'));
+

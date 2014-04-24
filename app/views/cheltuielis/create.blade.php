@@ -10,14 +10,7 @@ if(!empty($cheltuieli)) {
         $header = "Introdu cheltuieli";
 }
 
-if(Input::get('asociatie_id')) {
-    $asociatie_id = Input::get('asociatie_id');
-    Session::put('asociatie_id', $asociatie_id);
-} else if(Session::get('asociatie_id')) {
-    $asociatie_id = Session::get('asociatie_id');
-} else {
-    $asociatie_id = '0';
-}
+$asociatie_id = getInputOrSession('asociatie_id');
 $asociatie = $asociatie_id!='0' ? Asociatie::where('id', '=', $asociatie_id)->lists('denumire', 'id') : Asociatie::lists('denumire', 'id');
 $tipcheltuieli  = Tipcheltuieli::lists('denumire', 'id');
 ?>

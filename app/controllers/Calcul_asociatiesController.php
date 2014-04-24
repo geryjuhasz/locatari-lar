@@ -9,15 +9,7 @@ class Calcul_asociatiesController extends BaseController {
 	 */
 	public function index()
 	{
-            if(Input::get('asociatie_id')) {
-		$asociatie_id = Input::get('asociatie_id');
-		Session::put('asociatie_id', $asociatie_id);
-            } else if(Session::get('asociatie_id')) {
-		$asociatie_id = Session::get('asociatie_id');
-            } else {
-		$asociatie_id = '0';
-            }
-            
+            $asociatie_id = getInputOrSession('asociatie_id');
             //$bloc = Bloc::where('asociatie_id', '=', $asociatie_id )->get();
             $calcul = $asociatie_id!='0' ? Calcul_asociatie::where('asociatie_id', '=', $asociatie_id)->get(): Calcul_asociatie::all();;
             $this->layout->content = View::make('calcul_asociaties.index')
@@ -32,14 +24,7 @@ class Calcul_asociatiesController extends BaseController {
 	 */
 	public function create()
 	{
-             if(Input::get('asociatie_id')) {
-		$asociatie_id = Input::get('asociatie_id');
-		Session::put('asociatie_id', $asociatie_id);
-            } else if(Session::get('asociatie_id')) {
-		$asociatie_id = Session::get('asociatie_id');
-            } else {
-		$asociatie_id = '0';
-            }
+            $asociatie_id = getInputOrSession('asociatie_id');
             
             $this->layout->content = View::make('calcul_asociaties.create')
                     ->with('asociatie_id', $asociatie_id);

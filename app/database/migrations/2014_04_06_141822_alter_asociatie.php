@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateCostLocatarisTable extends Migration {
+class AlterAsociatie extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,11 @@ class CreateCostLocatarisTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('cost_locataris', function(Blueprint $table) {
-			$table->increments('id');
-			$table->integer('locatari_id');
-			$table->timestamps();
-		});
+		Schema::table('asociatie', function($table)
+                {
+                    $table->boolean('consum_apa');
+                    $table->boolean('consum_caldura');
+                });
 	}
 
 
@@ -27,7 +27,7 @@ class CreateCostLocatarisTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('cost_locataris');
+		Schema::drop('asociatie');
 	}
 
 }

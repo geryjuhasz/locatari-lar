@@ -42,7 +42,8 @@ class AsociatiesController extends BaseController {
 		
 		return Redirect::action('AsociatiesController@index')->with('flash_success', "Asociatia '$asociatie->denumire' a fost creata.");
 	}
-
+        
+                
 	/**
 	 * Display the specified resource.
 	 *
@@ -51,7 +52,7 @@ class AsociatiesController extends BaseController {
 	 */
 	public function show($id)
 	{
-        return View::make('asociaties.show');
+            return View::make('asociaties.show');
 	}
 
 	/**
@@ -62,11 +63,11 @@ class AsociatiesController extends BaseController {
 	 */
 	public function edit($id)
 	{
-        if(!Bloc::find($id)) {
-			return Redirect::action('AsociatiesController@index');
-		}
-		$this->layout->content = View::make('asociaties.create')
-			->with('asociatie', Asociatie::find($id));
+            if(!Asociatie::find($id)) {
+                return Redirect::action('AsociatiesController@index');
+            }
+            $this->layout->content = View::make('asociaties.create')
+		->with('asociatie', Asociatie::find($id));
 	}
 
 	/**
@@ -77,7 +78,15 @@ class AsociatiesController extends BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$input = Input::all();
+                $asociatie = Asociatie::find($id);
+                $asociatie->consum_apa = empty($input['consum_apa'])? false: true;
+                $asociatie->consum_caldura = empty($input['consum_caldura'])? false: true;
+		$asociatie->save();
+		
+		//return Redirect::action('Calcul_asociatiesController@index')->with('asociatie_id', $id);
+                return Redirect::action('Calcul_asociatiesController@index')->with('flash_info', 'Setari salvate.');
+                //return
 	}
 
 	/**

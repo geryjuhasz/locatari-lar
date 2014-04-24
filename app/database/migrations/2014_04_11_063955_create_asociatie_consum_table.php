@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateLocatarisTable extends Migration {
+class CreateAsociatieConsumTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,9 +12,11 @@ class CreateLocatarisTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('locataris', function(Blueprint $table) {
+		Schema::create('asociatie_consum', function(Blueprint $table) {
 			$table->increments('id');
-			$table->integer('scara_id');
+			$table->integer('asociatie_id');
+                        $table->integer('tipconsum_id');
+                        $table->integer('tipincapere_id');
 			$table->timestamps();
 		});
 	}
@@ -27,7 +29,7 @@ class CreateLocatarisTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('locataris');
+		Schema::drop('asociatie_consum');
 	}
 
 }

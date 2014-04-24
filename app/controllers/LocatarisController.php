@@ -9,14 +9,7 @@ class LocatarisController extends BaseController {
 	 */
 	public function index()
 	{
-            if(Input::get('scara_id')) {
-		$scara_id = Input::get('scara_id');
-		Session::put('scara_id', $scara_id);
-            } else if(Session::get('scara_id')) {
-		$scara_id = Session::get('scara_id');
-            } else {
-		$scara_id = '0';
-            }
+            $scara_id = getInputOrSession('scara_id');
             //$bloc = Bloc::where('asociatie_id', '=', $asociatie_id )->get();
             $locatari = $scara_id!='0' ? Locatari::where('scara_id', '=', $scara_id)->get(): Locatari::all();
 

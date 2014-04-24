@@ -46,3 +46,15 @@ function getToken($length=32) {
 	}
 	return $token;
 }
+
+function getInputOrSession($var) {
+    if(Input::get($var)) {
+	$result = Input::get($var);
+        Session::put($var, $result);
+    } else if(Session::get($var)) {
+        $result = Session::get($var);
+    } else {
+	$result = '0';
+    }
+    return $result;
+}

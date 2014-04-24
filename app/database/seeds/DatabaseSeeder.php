@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('CheltuielisTableSeeder');
 		$this->call('Cost_locatarisTableSeeder');
                 $this->call('UserTableSeeder');
+		$this->call('Asociatie_consumsTableSeeder');
 	}
 
 }

@@ -67,6 +67,16 @@ App::down(function()
 	return Response::make("Be right back!", 503);
 });
 
+
+App::error(function(Exception $exception, $code)
+{
+    if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException)
+    {
+        Log::error('NotFoundHttpException Route: ' . Request::url() );
+    }
+
+    Log::error($exception);
+});
 /*
 |--------------------------------------------------------------------------
 | Require The Filters File

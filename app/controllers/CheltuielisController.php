@@ -9,16 +9,8 @@ class CheltuielisController extends BaseController {
 	 */
 	public function index()
 	{
-            Session::forget('asociatie_id');
-            if(Input::get('asociatie_id')) {
-		$asociatie_id = Input::get('asociatie_id');
-		Session::put('asociatie_id', $asociatie_id);
-            } else if(Session::get('asociatie_id')) {
-		$asociatie_id = Session::get('asociatie_id');
-            } else {
-		$asociatie_id = '0';
-            }
-            
+            //Session::forget('asociatie_id');
+            $asociatie_id = getInputOrSession('asociatie_id');
             //$bloc = Bloc::where('asociatie_id', '=', $asociatie_id )->get();
             $cheltuieli = $asociatie_id!='0' ? Cheltuieli::where('asociatie_id', '=', $asociatie_id)->get(): array();
             $this->layout->content = View::make('cheltuielis.index')
