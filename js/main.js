@@ -25,12 +25,7 @@ $(document).ready(function() {
 	$('div.pagination > ul').each(function onEachPaginator (i, item) {
     $(item).addClass('pagination').parent().removeClass('pagination');
 	});
-	//jQuery init
-		$('#ads-filter input[name=date_begin]').datepicker({
-		onClose: function( selectedDate ) {
-			$('#ads-filter input[name=date_end]').datepicker( "option", "minDate", selectedDate );
-		}
-	});
+	
 	$('#ads-filter input[name=date_end]').datepicker({
 		onClose: function( selectedDate ) {
 			$('#ads-filter input[name=date_begin]').datepicker( "option", "maxDate", selectedDate );

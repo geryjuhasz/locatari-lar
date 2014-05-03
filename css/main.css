@@ -21,3 +21,6 @@ html, body {
 	width: 300px;
 	height: 300px;
 }
+.ui-datepicker-calendar {
+    display: none;
+}

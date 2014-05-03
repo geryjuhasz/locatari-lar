@@ -25,7 +25,7 @@ $tipcheltuieli  = Tipcheltuieli::lists('denumire', 'id');
 		{{ Form::select('tipcheltuieli_id', $tipcheltuieli, Input::old('tipcheltuieli_id'), array('class' => 'form-control width-200')) }}
                 
                 {{ Form::label('luna', 'Luna: ', array('class' => 'form-label')) }}
-                {{ Form::text('luna', '', array('class' => 'datepicker form-control hasDatepicker','placeholder' => 'Luna','data-datepicker' => 'datepicker')) }}
+                {{ Form::text('luna', '', array('class' => 'monthYearPick form-control','placeholder' => 'Luna')) }}
                 
                 {{ Form::label('suma', 'Suma: ', array('class' => 'form-label')) }}
                 {{ Form::text('suma', $cheltuieli->suma, array('class' => 'form-control')) }}
@@ -37,4 +37,15 @@ $tipcheltuieli  = Tipcheltuieli::lists('denumire', 'id');
 		{{ Form::submit('Submit', array('class' => 'btn btn-default')) }}
 	{{ Form::close() }}
 </div>
+<script type="text/javascript">
+options = {
+    pattern: 'yyyy-mm', // Default is 'mm/yyyy' and separator char is not mandatory
+    selectedYear: 2010,
+    startYear: <?php echo date('Y', strtotime('-2Years')); ?>,
+    finalYear: <?php echo date('Y', strtotime('+4Years')); ?>,
+    monthNames: ['Ian', 'Feb', 'Mar', 'Apr', 'Mai', 'Iun', 'Iul', 'Aug', 'Sep', 'Oct', 'Noi', 'Dec']
+};
+
+$('#luna').monthpicker(options);
+</script>
 @stop

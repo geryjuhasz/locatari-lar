@@ -10,9 +10,10 @@
 		{{-- HTML::script('packages/ckeditor/ckeditor.js') --}}
 		{{ HTML::script('js/jquery.js') }}
 		{{ HTML::script('js/jquery-ui.custom.js') }}
+                {{ HTML::script('js/jquery.mtz.monthpicker.js') }}
 		{{ HTML::script('packages/bootstrap/js/bootstrap.js') }}
 		{{ HTML::script('js/main.js') }}
-                {{ HTML::script('js/bootstrap-datepicker.js') }}
+                
 		<script>
 			urls = {
 				adsController: '{{ URL::to("ads") }}',
