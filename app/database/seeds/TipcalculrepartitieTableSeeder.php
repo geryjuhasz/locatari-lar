@@ -13,6 +13,9 @@ class TipcalculrepartitieTableSeeder extends Seeder {
                        array('denumire' => 'Apartament'),
                        array('denumire' => 'Scara'),
                        array('denumire' => 'Consum mc'),
+                       array('denumire' => 'Consum mc calda'),
+                       array('denumire' => 'Consum mc rece'),
+
 		);
 	
 		// Uncomment the below to run the seeder

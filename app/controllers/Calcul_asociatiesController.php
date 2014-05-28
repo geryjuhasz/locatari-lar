@@ -17,6 +17,8 @@ class Calcul_asociatiesController extends BaseController {
 			->with('asociatie_id', $asociatie_id);
 	}
 
+        
+        
 	/**
 	 * Show the form for creating a new resource.
 	 *

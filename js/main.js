@@ -282,4 +282,14 @@ $(document).ready(function() {
 		}
 	});
 	$('#admins-select-admin').change();
+        
 });
+
+var options = {
+            pattern: 'yyyy-mm', // Default is 'mm/yyyy' and separator char is not mandatory
+            selectedYear: 2014,
+            startYear: 2013,
+            finalYear: 2014,
+            monthNames: ['Ian', 'Feb', 'Mar', 'Apr', 'Mai', 'Iun', 'Iul', 'Aug', 'Sep', 'Oct', 'Noi', 'Dec']
+        };
+$('#luna').monthpicker(options);

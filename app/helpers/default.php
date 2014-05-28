@@ -58,3 +58,24 @@ function getInputOrSession($var) {
     }
     return $result;
 }
+
+function getDateInputOrSession($var) {
+    if(Input::get($var)) {
+	$result = Input::get($var);
+        Session::put($var, $result);
+    } else if(Session::get($var)) {
+        $result = new Datetime(Session::get($var));
+    } else {
+	$result = date('Y-m-d H:i:s');
+    }
+    return $result;
+}
+
+function getColumnSum($array, $columnname) {
+    $sum = 0;
+    foreach ($array as $a){
+        $sum = $sum + $a[$columnname];
+    }
+    return $sum;
+}
+

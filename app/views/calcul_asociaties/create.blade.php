@@ -26,13 +26,13 @@ $tiprepartitie = Tiprepartitie::lists('denumire', 'id');
                 {{ Form::select('asociatie_id', $asociatie, Input::old('asociatie_id'), array('class' => 'form-control width-200')) }}
 
 		{{ Form::label('tipcheltuieli_id', 'Tip cheltuieli: ', array('class' => 'form-label')) }}
-                {{ Form::select('tipcheltuieli_id', $tipcheltuieli, Input::old('tipcheltuieli_id'), array('class' => 'form-control width-200')) }}
+                {{ Form::select('tipcheltuieli_id', $tipcheltuieli, $calculasociatie->tipcheltuieli_id, array('class' => 'form-control width-200')) }}
 
                 {{ Form::label('tipcalculrepartitie_id', 'Calcul repartitie: ', array('class' => 'form-label')) }}
-                {{ Form::select('tipcalculrepartitie_id', $tipcalculrepartitie, Input::old('tipcalculrepartitie_id'), array('class' => 'form-control width-200')) }}
+                {{ Form::select('tipcalculrepartitie_id', $tipcalculrepartitie, $calculasociatie->tipcalculrepartitie_id, array('class' => 'form-control width-200')) }}
 
                 {{ Form::label('tiprepartitie_id', 'Tip repartitie: ', array('class' => 'form-label')) }}
-                {{ Form::select('tiprepartitie_id', $tiprepartitie, Input::old('tiprepartitie_id'), array('class' => 'form-control width-200')) }}
+                {{ Form::select('tiprepartitie_id', $tiprepartitie, $calculasociatie->tiprepartitie_id, array('class' => 'form-control width-200')) }}
 
 		<hr />
 		{{ Form::submit('Submit', array('class' => 'btn btn-default')) }}

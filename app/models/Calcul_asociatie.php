@@ -15,4 +15,18 @@ class Calcul_asociatie extends Eloquent {
         public function Tiprepartitie() {
 		return $this->belongsTo('Tiprepartitie', 'tiprepartitie_id');
         }
+        
+        //$object_id can be type Asociatie, Bloc, Scara, Apartament
+        //$tiprepartitie - will be: 1 - Asociatie, 2 - Bloc, 3 - Scara, 4 - Apartament
+        public function getNoPersons($objectid){
+            if($this->tiprepartitie_id == 1){
+                $locatari = Locatari::where('asociatie_id', '=', $object_id)->get();
+                return count($locatari);
+            }
+            if($this->tiprepartitie_id == 2){
+                
+                $locatari = Locatari::where('scara_id', '=', $scara_id)->get();
+                return count($locatari);
+            }
+        }
 }

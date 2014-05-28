@@ -1,7 +1,7 @@
 <?php
 
 class Cost_locatarisController extends BaseController {
-
+        protected $layout = 'layout';
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -9,7 +9,27 @@ class Cost_locatarisController extends BaseController {
 	 */
 	public function index()
 	{
-        return View::make('cost_locataris.index');
+            $asociatie_id = getInputOrSession('asociatie_id');
+            $calcul = $asociatie_id!='0' ? Calcul_asociatie::where('asociatie_id', '=', $asociatie_id)->get(): Calcul_asociatie::all();;
+            $luna = getInputOrSession('luna');
+
+            //
+            //calculateRepartition($asociatie_id, $luna);
+            
+            
+            //populare Cost_locatari
+            $cheltuieli = Cheltuieli::where('asociatie_id', '=', $asociatie_id)
+                    ->where('luna', '=', $luna)
+                    ->get();
+            //var_dump($cheltuieli);
+            //die();
+            
+            
+            //die();    
+            $this->layout->content = View::make('cost_locataris.index')
+			->with('calcul', $calcul)
+			->with('asociatie_id', $asociatie_id);
+            return View::make('cost_locataris.index');
 	}
 
 	/**
@@ -22,6 +42,13 @@ class Cost_locatarisController extends BaseController {
         return View::make('cost_locataris.create');
 	}
 
+        public function calculate()
+	{
+            calculateRepartition($asociatie_id, $luna);
+            return Redirect::action('Cost_locatarisController@index')->with('flash_success', "Reparitita a fost calculata.");
+            //return View::make('cost_locataris.index');
+	}
+        
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -29,7 +56,11 @@ class Cost_locatarisController extends BaseController {
 	 */
 	public function store()
 	{
-		//
+            $asociatie_id = getInputOrSession('asociatie_id');
+            $luna = getInputOrSession('luna');
+            calculateRepartition($asociatie_id, $luna);
+            return Redirect::action('Cost_locatarisController@index')->with('flash_success', "Reparitita a fost calculata.");
+            
 	}
 
 	/**
@@ -76,4 +107,6 @@ class Cost_locatarisController extends BaseController {
 		//
 	}
 
+        
+        
 }

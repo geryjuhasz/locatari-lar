@@ -45,7 +45,8 @@ class CheltuielisController extends BaseController {
 		$cheltuieli = new Cheltuieli();
 		$cheltuieli->fill($input);
 		$cheltuieli->save();
-		
+                
+               
 		return Redirect::action('CheltuielisController@index')->with('flash_success', "Cheltuiala  a fost salvata.");
                 
 	}
@@ -74,6 +75,7 @@ class CheltuielisController extends BaseController {
 		}
 		$this->layout->content = View::make('cheltuielis.create')
 			->with('cheltuieli', Cheltuieli::find($id));
+            		
             //return View::make('cheltuielis.create');
 	}
 
@@ -88,7 +90,13 @@ class CheltuielisController extends BaseController {
 		$input = Input::all();
 		$cheltuieli = Cheltuieli::find($id);
 		$cheltuieli->fill($input);
+                
+                $luna = getDateInputOrSession('luna');
+                $cheltuieli->luna = $luna;
+                //var_dump($luna);
+                //die();
 		$cheltuieli->save();
+              
 		return Redirect::action('CheltuielisController@index')
 			->with('flash_info', "Cheltuieli salvate.");
 	}

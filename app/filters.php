@@ -102,6 +102,7 @@ Route::filter('nav', function() {
                         'Asociatii' => URL::Action('AsociatiesController@index'),
                         'Cheltuieli' => URL::Action('CheltuielisController@index'),
                         'Consum' => URL::Action('ConsumsController@index'),
+                        'Calcule' => URL::Action('Cost_locatarisController@index'),
 			'Logout' => URL::action('AdminsController@logout')
 		));
 	}

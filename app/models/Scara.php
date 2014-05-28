@@ -13,5 +13,18 @@ class Scara extends Eloquent {
         public function locatari() {
             return $this->hasMany('Locatari');
         }
+        
+        public function scopeFromBloc($query, $bloc_id)
+        {
+            return $query->where('bloc_id', '=', $bloc_id);
+        }
+        
+        public function scopeFromAsociatie($query, $asociatie_id){
+            $blocs = Bloc::where('asociatie_id', '=', $asociatie_id)->get();
+            foreach ($blocs as $bloc) {
+                $ids[] = $bloc->id;
+            }
+            return $query->wherein('bloc_id', $ids);
+        }
                
 }

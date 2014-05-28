@@ -14,6 +14,8 @@ class TipcheltuieliTableSeeder extends Seeder {
                     array('denumire' => 'Cheltuieli comune'),
                     array('denumire' => 'Cheltuieli specifice'),
                     array('denumire' => 'Taxa elsaco'),
+                    array('denumire' => 'Energie electrica incalzire'),
+
 		);
 	
 		// Uncomment the below to run the seeder

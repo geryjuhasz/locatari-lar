@@ -5,4 +5,6 @@ class Tipcalculrepartitie extends Eloquent {
         protected $table = 'tipcalculrepartitie';
 
 	public static $rules = array();
+        
+        
 }

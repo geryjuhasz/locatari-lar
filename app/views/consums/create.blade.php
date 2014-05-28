@@ -1,35 +1,40 @@
 <?php
-if(!empty($consum)) {
-	$action = array('ConsumsController@update', $consum->id);
-	$method = 'PUT';
-	$header = "Modifica";
-} else {
-	$action = 'CheltuielisController@store';
-	$method = 'POST';
-	$consum = new Consum();
-        $header = "Introdu consum";
-}
+$action = 'ConsumsController@store';
+$method = 'POST';
+$header = "Introdu consum";
+//$consum = new Consum();
 
+$tipconsum_id = getInputOrSession('tipconsum_id');
+$tipconsum = Tipconsum::all();
 $asociatie_id = getInputOrSession('asociatie_id');
 $asociatie = $asociatie_id!='0' ? Asociatie::where('id', '=', $asociatie_id)->lists('denumire', 'id') : Asociatie::lists('denumire', 'id');
-$tipcheltuieli  = Tipcheltuieli::lists('denumire', 'id');
+    
+//$consum->tipconsum_id = $tipconsum_id;
+//$consum->locatar_id = $locatar_id;
+$consumlocatar = new Consum();
 ?>
 @section('content')
 <div class="col-4">
 	<h3>{{ $header }}</h3>
-        {{ Form::model($consum, array('route' => array('consums.update', $consum->id))) }}
-	{{ Form::open(array('action' => $action, 'method' => $method)) }}
-                 
-                {{ Form::label('luna', 'Luna: ', array('class' => 'form-label')) }}
-                {{ Form::text('luna', '', array('class' => 'datepicker form-control hasDatepicker','placeholder' => 'Luna','data-datepicker' => 'datepicker')) }}
+        {{ Form::open(array('action' => $action, 'method' => $method)) }}
+            {{ Form::selectModel($tipconsum, 'denumire', $tipconsum_id, 'tipconsum_id', array('class' => 'page-specifier form-control'), 'Alege consum') }}
+        <hr />
+
+	
+            @foreach ($asociatie_consum as $ac)
+                {{ Form::label('incapere',  $ac->tipincapere->denumire.': ', array('class' => 'form-label')) }}
+                <br/>
+                {{ Form::label($ac->tipincapere->denumire.'_index_vechi_rece',  'Index vechi rece', array('class' => 'form-label')) }}
+                {{ Form::text($ac->tipincapere->denumire.'_index_vechi_rece', $consumlocatar->index_vechi_rece, array('class' => 'form-control')) }}
+                {{ Form::label($ac->tipincapere->denumire.'_index_nou_rece',  'Index nou rece', array('class' => 'form-label')) }}
+                {{ Form::text($ac->tipincapere->denumire.'_index_nou_rece', $consumlocatar->index_nou_rece, array('class' => 'form-control')) }}
                 
-                {{ Form::label('suma', 'Suma: ', array('class' => 'form-label')) }}
-                {{ Form::text('suma', $consum->suma, array('class' => 'form-control')) }}
-                
-                {{ Form::label('detalii', 'Detalii: ', array('class' => 'form-label')) }}
-                {{ Form::text('detalii', $consum->detalii, array('class' => 'form-control')) }}
-                
-		<hr />
+                {{ Form::label($ac->tipincapere->denumire.'_index_vechi_calda',  'Index vechi calda', array('class' => 'form-label')) }}
+                {{ Form::text($ac->tipincapere->denumire.'_index_vechi_calda', $consumlocatar->index_vechi_calda, array('class' => 'form-control')) }}
+                {{ Form::label($ac->tipincapere->denumire.'_index_nou_calda',  'Index nou calda', array('class' => 'form-label')) }}
+                {{ Form::text($ac->tipincapere->denumire.'_index_nou_calda', $consumlocatar->index_nou_calda, array('class' => 'form-control')) }}
+            @endforeach
+            <hr />
 		{{ Form::submit('Submit', array('class' => 'btn btn-default')) }}
 	{{ Form::close() }}
 </div>

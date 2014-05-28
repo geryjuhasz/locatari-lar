@@ -19,13 +19,13 @@ $tipcheltuieli  = Tipcheltuieli::lists('denumire', 'id');
 	<h3>{{ $header }}</h3>
 	{{ Form::open(array('action' => $action, 'method' => $method, 'id' => 'create-cheltuieli')) }}
                 {{ Form::label('asociatie_id', 'Asociatie: ', array('class' => 'form-label')) }}
-                {{ Form::select('asociatie_id', $asociatie, Input::old('asociatie_id'), array('class' => 'form-control width-200')) }}
+                {{ Form::select('asociatie_id', $asociatie, $cheltuieli->asociatie_id, array('class' => 'form-control width-200')) }}
 
                 {{ Form::label('tipcheltuieli_id', 'Tip cheltuieli: ', array('class' => 'form-label')) }}
-		{{ Form::select('tipcheltuieli_id', $tipcheltuieli, Input::old('tipcheltuieli_id'), array('class' => 'form-control width-200')) }}
+		{{ Form::select('tipcheltuieli_id', $tipcheltuieli, $cheltuieli->tipcheltuieli_id, array('class' => 'form-control width-200')) }}
                 
                 {{ Form::label('luna', 'Luna: ', array('class' => 'form-label')) }}
-                {{ Form::text('luna', '', array('class' => 'monthYearPick form-control','placeholder' => 'Luna')) }}
+                {{ Form::text('luna', $cheltuieli->luna, array('class' => 'monthYearPick form-control','placeholder' => 'Alege luna')) }}
                 
                 {{ Form::label('suma', 'Suma: ', array('class' => 'form-label')) }}
                 {{ Form::text('suma', $cheltuieli->suma, array('class' => 'form-control')) }}
@@ -40,8 +40,8 @@ $tipcheltuieli  = Tipcheltuieli::lists('denumire', 'id');
 <script type="text/javascript">
 options = {
     pattern: 'yyyy-mm', // Default is 'mm/yyyy' and separator char is not mandatory
-    selectedYear: 2010,
-    startYear: <?php echo date('Y', strtotime('-2Years')); ?>,
+    selectedYear: 2014,
+    startYear: <?php echo date('Y'); ?>,
     finalYear: <?php echo date('Y', strtotime('+4Years')); ?>,
     monthNames: ['Ian', 'Feb', 'Mar', 'Apr', 'Mai', 'Iun', 'Iul', 'Aug', 'Sep', 'Oct', 'Noi', 'Dec']
 };

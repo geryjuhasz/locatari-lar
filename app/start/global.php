@@ -90,3 +90,4 @@ App::error(function(Exception $exception, $code)
 
 require app_path().'/filters.php';
 require app_path().'/helpers/default.php';
+require app_path().'/helpers/calculate.php';
