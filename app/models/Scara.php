@@ -24,7 +24,9 @@ class Scara extends Eloquent {
             foreach ($blocs as $bloc) {
                 $ids[] = $bloc->id;
             }
-            return $query->wherein('bloc_id', $ids);
+            if($ids)
+                return $query->wherein('bloc_id', $ids);
+            else return null;
         }
                
 }

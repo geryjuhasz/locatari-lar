@@ -14,9 +14,8 @@ class Consum extends Eloquent {
 		return $this->belongsTo('tipincapere', 'tipincapere_id');
 	}
         
-        public function getConsum($locatar_id, $tipconsum_id) {
-		return $this->where('locatari_id', $locatar_id)
-                        ->andwhere('tipconsum_id', $tipconsum_id);
+        public function scopeLocatarConsum($query, $locatar_id) {
+		return $query->where('locatari_id', $locatar_id);
 	}
         
         public function scopeFromScara($query, $scara_id)

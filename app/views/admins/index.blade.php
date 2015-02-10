@@ -6,7 +6,6 @@
 			<th>#</th>
 			<th>Name</th>
 			<th>Type</th>
-			<th>Country</th>
 			<th></th>
 			<th></th>
 			<th></th>
@@ -17,7 +16,6 @@
 				<td>{{ $admin->id }}</td>
 				<td>{{ $admin->name }}</td>
 				<td>{{ $admin->type }}</td>
-				<td>{{ $admin->country? $admin->country->name: '' }}</td>
 				<td><a href="{{ URL::action('AdminsController@edit', $admin->id) }}">Edit</a></td>
 				<td>
 					{{ Form::open(array('action' => array('AdminsController@destroy', $admin->id), 'method' => 'DELETE')) }}

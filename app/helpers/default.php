@@ -64,7 +64,8 @@ function getDateInputOrSession($var) {
 	$result = Input::get($var);
         Session::put($var, $result);
     } else if(Session::get($var)) {
-        $result = new Datetime(Session::get($var));
+        $result = date_format(new Datetime(Session::get($var)), 'Y-m-d');
+                //new Datetime(Session::get($var));
     } else {
 	$result = date('Y-m-d H:i:s');
     }

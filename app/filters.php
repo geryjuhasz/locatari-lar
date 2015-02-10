@@ -82,27 +82,32 @@ Route::filter('csrf', function()
 
 
 Route::filter('nav', function() {
-	if(Auth::user()->type == 'super') {
+        //var_dump(Auth::user());die();
+	if(Auth::user()->type == 'super') { //type = 1 superadmin
 		View::share('nav_left', array(
+                        'Dashboard' => URL::action('DashboardController@index'),
 			'Asociatii' => URL::Action('AsociatiesController@index'),
                         'Cheltuieli' => URL::Action('CheltuielisController@index'),
                         'Consum' => URL::Action('ConsumsController@index'),
-                        'Admins' => URL::action('AdminsController@index'),
+                        'Calcule' => URL::Action('Cost_locatarisController@index'),
+                        'Administratori' => URL::action('AdminsController@index'),
                         'Logout' => URL::action('AdminsController@logout')
 		));
-	} else if(Auth::user()->type == 'admin') {
+	} else if(Auth::user()->type == 'admin') { //type =2 administrator
 		View::share('nav_left', array(
-                        'Asociatii' => URL::Action('AsociatiesController@index'),
-                        'Cheltuieli' => URL::Action('CheltuielisController@index'),
-                        'Consum' => URL::Action('ConsumsController@index'),
-			'Logout' => URL::action('AdminsController@logout')
-		));
-	} else {
-        	View::share('nav_left', array(
-                        'Asociatii' => URL::Action('AsociatiesController@index'),
+                        'Dashboard' => URL::action('DashboardController@index'),
                         'Cheltuieli' => URL::Action('CheltuielisController@index'),
                         'Consum' => URL::Action('ConsumsController@index'),
                         'Calcule' => URL::Action('Cost_locatarisController@index'),
+			'Logout' => URL::action('AdminsController@logout')
+		));
+	} else {
+        	View::share('nav_left', array( 
+                        'Dashboard' => URL::action('DashboardController@index'),
+                        //'Asociatii' => URL::Action('AsociatiesController@index'),
+                        //'Cheltuieli' => URL::Action('CheltuielisController@index'),
+                        //'Consum' => URL::Action('ConsumsController@index'),
+                        //'Calcule' => URL::Action('Cost_locatarisController@index'),
 			'Logout' => URL::action('AdminsController@logout')
 		));
 	}

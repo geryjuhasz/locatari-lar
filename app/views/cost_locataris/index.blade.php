@@ -6,6 +6,9 @@ $method = 'POST';
 
 $luna = getInputOrSession('luna');
 $asociatie_id = getInputOrSession('asociatie_id');
+
+//var_dump($costuri);
+//die();
 ?>
 
 <h2>Calcul asociatie:</h2>
@@ -17,8 +20,21 @@ $asociatie_id = getInputOrSession('asociatie_id');
         
 </div>
 {{ Form::close() }}
-<div class="pull-right">
+<div>
 </div>
+
+<br/>
+<br/>
+<br/>
+
+
+@foreach($costuri as $cost)
+    @include('cost_locataris.cost_scara', array('cost_scara'=>$cost['cost'], 'denumire_scara'=>$cost['scara']))
+@endforeach
+
+
+
+
 <script type="text/javascript">
 options = {
     pattern: 'yyyy-mm', // Default is 'mm/yyyy' and separator char is not mandatory

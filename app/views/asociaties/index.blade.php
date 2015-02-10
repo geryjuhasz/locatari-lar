@@ -19,7 +19,7 @@
 			@foreach($asociatie as $aasociatie)
 			<tr>
 				<td>{{ $aasociatie->denumire }}</td>
-                                <td>{{ $aasociatie->administrator }}</td>
+                                <td>{{ $aasociatie->admin_id ? $aasociatie->administrator->name : '' }}</td>
 				<td><a href="{{ URL::action('AsociatiesController@edit', $aasociatie->id) }}">Editeaza</a></td>
 				<td><a href="{{ URL::action('Calcul_asociatiesController@index', array('asociatie_id' => $aasociatie->id)) }}">Setari</a></td>
                                 <td><a href="{{ URL::action('BlocsController@index', array('asociatie_id' => $aasociatie->id)) }}">Blocuri</a></td>

@@ -13,6 +13,7 @@
 			<th>Luna</th>
                         <th>Suma</th>
 			<th>Detalii</th>
+                        <th>Consum factura</th>
       			<th>Data introducerii</th>
                         <th></th>
                         <th></th>
@@ -25,6 +26,7 @@
                                 <td>{{ $ccheltuieli->luna }}</td>
                                 <td>{{ $ccheltuieli->suma }}</td>
                                 <td>{{ $ccheltuieli->detalii }}</td>
+                                <td>{{ $ccheltuieli->consum }}</td>
                                 <td>{{ $ccheltuieli->created_at }}</td>
 				<td><a href="{{ URL::action('CheltuielisController@edit', $ccheltuieli->id) }}">Edit</a></td>
                                 <td>

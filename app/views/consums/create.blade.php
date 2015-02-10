@@ -1,17 +1,20 @@
 <?php
-$action = 'ConsumsController@store';
-$method = 'POST';
-$header = "Introdu consum";
-//$consum = new Consum();
+if(!empty($consumlocatar)) {
+	$action = array('ConsumsController@update', $cheltuieli->id);
+	$method = 'PUT';
+	$header = "Modifica consum";
+} else {
+	$action = 'ConsumsController@store';
+	$method = 'POST';
+	$consumlocatar = new Consum();
+        $header = "Introdu consum";
+}
 
 $tipconsum_id = getInputOrSession('tipconsum_id');
 $tipconsum = Tipconsum::all();
 $asociatie_id = getInputOrSession('asociatie_id');
 $asociatie = $asociatie_id!='0' ? Asociatie::where('id', '=', $asociatie_id)->lists('denumire', 'id') : Asociatie::lists('denumire', 'id');
     
-//$consum->tipconsum_id = $tipconsum_id;
-//$consum->locatar_id = $locatar_id;
-$consumlocatar = new Consum();
 ?>
 @section('content')
 <div class="col-4">

@@ -35,11 +35,12 @@ $tipconsum = Tipconsum::all();
                     @foreach ($tabel as $t)
                         <th>{{ $t }}</th>	
                     @endforeach
-                    <th>Editare</th>
+                    <th colspan="2">Editare</th>
                     
 		</tr>
-                
-		<tbody>
+         </thead>
+       
+	<tbody>
 			@foreach($consum as $cons)
 			<tr>
                             <?php 
@@ -51,11 +52,19 @@ $tipconsum = Tipconsum::all();
                             @foreach ($cons as $c)
                                 <td>{{ $c }}</td>
                             @endforeach
-                            <td><a href="{{ URL::action('ConsumsController@create', array('locatar_id' => $locatar_id)) }}" class="btn btn-default">Consum</a></td>
+                            <td colspan="2"><a href="{{ URL::action('ConsumsController@create', $locatar_id) }}" class="btn btn-default">Consum</a></td>
                         </tr>
 			@endforeach
-		</tbody>
-	</thead>
+	</tbody>
+        <tfoot>       
+                <tr>
+                    @foreach ($tabelfooter as $tf)
+                        <td>{{ $tf }}</td>	
+                    @endforeach
+                    <td></td>
+                    
+		</tr>
+        </tfoot>
 </table>
 <script type="text/javascript">
 options = {

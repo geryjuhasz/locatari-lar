@@ -29,7 +29,9 @@ class Locatari extends Eloquent {
             foreach ($scaras as $scara) {
                 $ids[] = $scara->id;
             }
-            return $query->wherein('scara_id', $ids);
+            if($ids)
+                return $query->wherein('scara_id', $ids);
+            else return null;
         }
         
         public function scopeFromAsociatie($query, $asociatie_id){
@@ -38,6 +40,8 @@ class Locatari extends Eloquent {
             foreach ($scaras as $scara) {
                 $ids[] = $scara->id;
             }
-            return $query->wherein('scara_id', $ids);
+            if($ids)
+                return $query->wherein('scara_id', $ids);
+            else return null;
         }
 }

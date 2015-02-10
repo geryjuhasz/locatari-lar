@@ -17,4 +17,8 @@ class Asociatie extends Eloquent {
         public function asociatie_consum() {
 		return $this->hasMany('Asociatie_consum', 'asociatie_id');
 	}
+        
+        public function administrator() {
+		return $this->belongsTo('User', 'admin_id');
+	}
 }

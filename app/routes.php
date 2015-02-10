@@ -11,11 +11,14 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('homepage');
-});
+//Route::get('/', function()
+//{
+//    return View::make('homepage');
+//});
 
+
+
+Route::resource('/', 'Frontend@index');
 
 Route::group(array('before' => 'backend_auth|nav'), function() {
 	Route::resource('blocs', 'BlocsController');
@@ -27,10 +30,12 @@ Route::group(array('before' => 'backend_auth|nav'), function() {
         Route::resource('cheltuielis', 'CheltuielisController');
         Route::resource('cost_locataris', 'Cost_locatarisController');
         Route::resource('asociatie_consums', 'Asociatie_consumsController');
-
+        Route::resource('admins', 'AdminsController');
+        Route::resource('dashboard', 'DashboardController');
         Route::get('logout_admin', 'AdminsController@logout');
-
 });
+
+
 
 Route::get('login_admin', array('as' => 'login', 'uses' => 'AdminsController@loginForm'));
 Route::post('login_admin', array('as' => 'login', 'uses' => 'AdminsController@login'));

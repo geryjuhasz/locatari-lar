@@ -33,6 +33,9 @@ $tipcheltuieli  = Tipcheltuieli::lists('denumire', 'id');
                 {{ Form::label('detalii', 'Detalii: ', array('class' => 'form-label')) }}
                 {{ Form::text('detalii', $cheltuieli->detalii, array('class' => 'form-control')) }}
                 
+                {{ Form::label('consum', 'Consum de pe factura: ', array('class' => 'form-label')) }}
+                {{ Form::text('consum', $cheltuieli->consum, array('class' => 'form-control')) }}
+                
 		<hr />
 		{{ Form::submit('Submit', array('class' => 'btn btn-default')) }}
 	{{ Form::close() }}
