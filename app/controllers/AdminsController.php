@@ -1,15 +1,46 @@
 <?php
 
 class AdminsController extends BaseController {
-
-	/**
+        protected $layout = 'layout';
+        
+        public function __construct() {
+            View::share('active_link', 'Administratori');
+            $admin = Auth::user();
+            if(!$admin) return; //Login or logout actions are permitted
+            //var_dump($route);die();
+            //if($route) list($controller, $action) = explode('@', $route->getAction());
+      
+//            if($admin->type === 'editor' && !in_array($action, array('login', 'loginForm', 'logout'))) {
+//                return Redirect::action('AdsController@index')->with('flash_warning', 'Permission denied.');
+//            }
+//            $this->beforeFilter(function() use($admin) {
+//                if($admin->type !== 'super') {
+//                    return Redirect::action('DashboardController@index')->with('flash_warning', 'Permission denied.');
+//                }
+//            });
+	}
+        
+        public function index() {
+            if(Auth::user()->type !== 'super') {
+                return Redirect::action('DashboardController@index')->with('flash_warning', 'Permission denied.');
+            }
+            $admins = Admin::all();
+            $this->layout->content = View::make('admins.index')->with('admins', $admins);
+	}
+        
+        /**
 	 * Show the form for creating a new resource.
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{
-        return View::make('admins.create');
+            if(Auth::user()->type !== 'super') {
+                return Redirect::action('DashboardController@index')->with('flash_warning', 'Permission denied.');
+            }
+            $this->layout->content = View::make('admins.form');
+
+            //return View::make('admins.create');
 	}
 
 	/**
@@ -19,7 +50,16 @@ class AdminsController extends BaseController {
 	 */
 	public function store()
 	{
-		//
+            if(Auth::user()->type !== 'super') {
+                return Redirect::action('DashboardController@index')->with('flash_warning', 'Permission denied.');
+            }
+            $input = Input::except('_method', '_token');
+            $result = $this->createOrUpdate($input);
+            if(!$result['success']) {
+                    Input::flash();
+                    return Redirect::action('AdminsController@create')->with('flash_error', $result['validator']->messages());
+            }
+            return Redirect::action('AdminsController@index')->with('flash_success', 'Admin created.');
 	}
 
 	/**
@@ -30,7 +70,10 @@ class AdminsController extends BaseController {
 	 */
 	public function show($id)
 	{
-        return View::make('admins.show');
+            if(Auth::user()->type !== 'super') {
+                return Redirect::action('DashboardController@index')->with('flash_warning', 'Permission denied.');
+            }
+            return View::make('admins.show');
 	}
 
 	/**
@@ -41,7 +84,12 @@ class AdminsController extends BaseController {
 	 */
 	public function edit($id)
 	{
-        return View::make('admins.edit');
+            if(Auth::user()->type !== 'super') {
+                return Redirect::action('DashboardController@index')->with('flash_warning', 'Permission denied.');
+            }
+            $admin = Admin::find($id);
+            $this->layout->content = View::make('admins.form')
+			->with('admin', $admin);
 	}
 
 	/**
@@ -50,9 +98,19 @@ class AdminsController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
+        
 	public function update($id)
 	{
-		//
+            if(Auth::user()->type !== 'super') {
+                return Redirect::action('DashboardController@index')->with('flash_warning', 'Permission denied.');
+            }
+            $input = Input::except('_method', '_token');
+            $result = $this->createOrUpdate($input, $id);
+            if(!$result['success']) {
+                    Input::flash();
+                    return Redirect::action('AdminsController@edit', $id)->with('flash_error', $result['validator']->messages());
+            }
+            return Redirect::action('AdminsController@index')->with('flash_info', 'Admin updated.');
 	}
 
 	/**
@@ -70,13 +128,10 @@ class AdminsController extends BaseController {
 		if(Auth::check()) return Redirect::to('/');
 		return View::make('login');
 	}
-	public function index() {
-		$admins = Admin::all();
-		$this->layout->content = View::make('admins.index')->with('admins', $admins);
-	}
+	
         
         public function login() {
-		if(Auth::check()) return Redirect::to('/');
+		if(Auth::check()) return Redirect::to('dashboard');
 		$input = Input::all();
 		$remember = Input::get('remember') ? true : false;
 		$validator = Validator::make($input, array(
@@ -88,7 +143,7 @@ class AdminsController extends BaseController {
 			return Redirect::action('AdminsController@login')->with('flash_error', $validator->messages());
 		}
 		if(Auth::attempt(array('username' => Input::get('name'), 'password' => Input::get('password')), $remember)) {
-			$redir_url = Session::get('redir_url', '/');
+			$redir_url = Session::get('redir_url', 'dashboard');
                         Session::forget('redir_url');
                         return Redirect::to($redir_url);
 		} else {
@@ -100,4 +155,36 @@ class AdminsController extends BaseController {
 		return Redirect::action('AdminsController@loginForm')->with('flash_info', 'Logged out.');
 	}
 
+        private function createOrUpdate($input, $id = null) {
+            if(Auth::user()->type !== 'super') {
+                return Redirect::action('DashboardController@index')->with('flash_warning', 'Permission denied.');
+            }
+            $admin = $id? Admin::find($id) : new Admin();
+            $rules = array(
+                'name' => 'required|unique:users,name,'.$admin->id,
+		'email' => 'required|email|unique:users,email,'.$admin->id
+            );
+		
+            if(Auth::user()->isAdmin()) {
+		$rules['type'] = 'in:editor,admin';
+            }
+            
+            if($id) $rules['password'] = 'min:4|confirmed';
+            else $rules['password'] = 'required|min:4|confirmed';
+            $validator = Validator::make($input, $rules);
+            if($validator->fails()) return array('success' => false, 'validator' => $validator);
+            
+		$data = $input;
+		unset($data['password_confirmation']);
+		if($data['password'])
+			$data['password'] = Hash::make($data['password']);
+		else
+			unset($data['password']);
+		Admin::unguard();
+		$admin->fill($data);
+		$admin->save();
+		Admin::reguard();
+		
+		return array('success' => true, 'admin' => $admin);
+	}
 }

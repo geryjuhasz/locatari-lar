@@ -2,6 +2,16 @@
 
 class CheltuielisController extends BaseController {
         protected $layout = 'layout';
+        
+        public function __construct() {
+            View::share('active_link', 'Cheltuieli');
+            $admin = $this->admin = Auth::user();
+            $this->beforeFilter(function() use($admin) {
+                if($admin->type !== 'super') {
+//                    return Redirect::action('AdminsController@login')->with('flash_warning', 'Permission denied.');
+                }
+            });
+	}
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -44,9 +54,10 @@ class CheltuielisController extends BaseController {
 		//if($validator->fails()) return Redirect::action('BlocsController@create')->with('flash_error', $validator->messages());
 		$cheltuieli = new Cheltuieli();
 		$cheltuieli->fill($input);
+                $luna = date_format(new Datetime(getInputOrSession('luna')), 'Y-m-d');
+                $cheltuieli->luna = $luna;
 		$cheltuieli->save();
-                
-               
+                               
 		return Redirect::action('CheltuielisController@index')->with('flash_success', "Cheltuiala  a fost salvata.");
                 
 	}
@@ -59,7 +70,7 @@ class CheltuielisController extends BaseController {
 	 */
 	public function show($id)
 	{
-        return View::make('cheltuielis.show');
+            return View::make('cheltuielis.show');
 	}
 
 	/**
@@ -71,10 +82,10 @@ class CheltuielisController extends BaseController {
 	public function edit($id)
 	{
             if(!Cheltuieli::find($id)) {
-			return Redirect::action('CheltuielisController@index');
-		}
-		$this->layout->content = View::make('cheltuielis.create')
-			->with('cheltuieli', Cheltuieli::find($id));
+		return Redirect::action('CheltuielisController@index');
+            }
+            $this->layout->content = View::make('cheltuielis.create')
+		->with('cheltuieli', Cheltuieli::find($id));
             		
             //return View::make('cheltuielis.create');
 	}
@@ -91,7 +102,7 @@ class CheltuielisController extends BaseController {
 		$cheltuieli = Cheltuieli::find($id);
 		$cheltuieli->fill($input);
                 
-                $luna = getDateInputOrSession('luna');
+                $luna = date_format(new Datetime(getInputOrSession('luna')), 'Y-m-d');
                 $cheltuieli->luna = $luna;
                 //var_dump($luna);
                 //die();

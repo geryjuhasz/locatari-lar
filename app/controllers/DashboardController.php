@@ -1,7 +1,16 @@
 <?php
 
-class Asociatie_consumsController extends BaseController {
-        
+class DashboardController extends \BaseController {
+        protected $layout = 'layout';   
+        public function __construct() {
+            View::share('active_link', 'Dashboard');
+            $admin = $this->admin = Auth::user();
+            $this->beforeFilter(function() use($admin) {
+                if($admin->type !== 'super') {
+//                    return Redirect::action('AdminsController@login')->with('flash_warning', 'Permission denied.');
+                }
+            });
+	}
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -9,7 +18,8 @@ class Asociatie_consumsController extends BaseController {
 	 */
 	public function index()
 	{
-        return View::make('asociatie_consums.index');
+		//
+            return View::make('dashboards.index');
 	}
 
 	/**
@@ -19,7 +29,7 @@ class Asociatie_consumsController extends BaseController {
 	 */
 	public function create()
 	{
-        return View::make('asociatie_consums.create');
+		//
 	}
 
 	/**
@@ -40,7 +50,7 @@ class Asociatie_consumsController extends BaseController {
 	 */
 	public function show($id)
 	{
-        return View::make('asociatie_consums.show');
+		//
 	}
 
 	/**
@@ -51,7 +61,7 @@ class Asociatie_consumsController extends BaseController {
 	 */
 	public function edit($id)
 	{
-        return View::make('asociatie_consums.edit');
+		//
 	}
 
 	/**

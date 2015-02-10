@@ -1,7 +1,7 @@
 <?php
 
-class Asociatie_consumsController extends BaseController {
-        
+class Frontend extends BaseController {
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -9,7 +9,7 @@ class Asociatie_consumsController extends BaseController {
 	 */
 	public function index()
 	{
-        return View::make('asociatie_consums.index');
+            return View::make('frontends.index');
 	}
 
 	/**
@@ -19,7 +19,7 @@ class Asociatie_consumsController extends BaseController {
 	 */
 	public function create()
 	{
-        return View::make('asociatie_consums.create');
+            //return View::make('frontends.create');
 	}
 
 	/**
@@ -40,7 +40,7 @@ class Asociatie_consumsController extends BaseController {
 	 */
 	public function show($id)
 	{
-        return View::make('asociatie_consums.show');
+            //return View::make('frontends.show');
 	}
 
 	/**
@@ -51,7 +51,7 @@ class Asociatie_consumsController extends BaseController {
 	 */
 	public function edit($id)
 	{
-        return View::make('asociatie_consums.edit');
+            //return View::make('frontends.edit');
 	}
 
 	/**

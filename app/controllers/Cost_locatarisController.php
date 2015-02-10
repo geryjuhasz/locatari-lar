@@ -10,26 +10,35 @@ class Cost_locatarisController extends BaseController {
 	public function index()
 	{
             $asociatie_id = getInputOrSession('asociatie_id');
-            $calcul = $asociatie_id!='0' ? Calcul_asociatie::where('asociatie_id', '=', $asociatie_id)->get(): Calcul_asociatie::all();;
-            $luna = getInputOrSession('luna');
-
-            //
+            //$calcul = $asociatie_id!='0' ? Calcul_asociatie::where('asociatie_id', '=', $asociatie_id)->get(): Calcul_asociatie::all();;
+            //$luna = getDateInputOrSession('luna');
+            $luna = date_format(new Datetime(getInputOrSession('luna')), 'Y-m-d');
+            
+            
             //calculateRepartition($asociatie_id, $luna);
-            
-            
-            //populare Cost_locatari
-            $cheltuieli = Cheltuieli::where('asociatie_id', '=', $asociatie_id)
-                    ->where('luna', '=', $luna)
-                    ->get();
-            //var_dump($cheltuieli);
+            //calculateCostLocatari($asociatie_id, $luna);
             //die();
+            $scari = array();
+            $scari = Scara::FromAsociatie($asociatie_id)->get();
             
-            
-            //die();    
+            $costuri_salvate = array();  
+            //var_dump($costuri_salvate);die();
+            foreach ($scari as $scara){
+                $costuri_salvate[$scara->id]['scara'] = $scara->denumire;
+                $costuri_scara = array();
+                $costuri_scara = Cost_locatari::FromScara($scara->id)
+                        ->where('luna', '=', $luna)
+                        ->get();
+                $costuri_salvate[$scara->id]['cost'] = $costuri_scara;
+            }
+//            $costuri_salvate = Cost_locatari::FromAsociatie($asociatie_id)
+//                        ->where('luna', '=', $luna)
+//                        ->get();
+//            
             $this->layout->content = View::make('cost_locataris.index')
-			->with('calcul', $calcul)
+			->with('costuri', $costuri_salvate)
 			->with('asociatie_id', $asociatie_id);
-            return View::make('cost_locataris.index');
+            //return View::make('cost_locataris.index');
 	}
 
 	/**
@@ -44,8 +53,6 @@ class Cost_locatarisController extends BaseController {
 
         public function calculate()
 	{
-            calculateRepartition($asociatie_id, $luna);
-            return Redirect::action('Cost_locatarisController@index')->with('flash_success', "Reparitita a fost calculata.");
             //return View::make('cost_locataris.index');
 	}
         
@@ -58,7 +65,10 @@ class Cost_locatarisController extends BaseController {
 	{
             $asociatie_id = getInputOrSession('asociatie_id');
             $luna = getInputOrSession('luna');
+            
             calculateRepartition($asociatie_id, $luna);
+            calculateCostLocatari($asociatie_id, $luna);
+            
             return Redirect::action('Cost_locatarisController@index')->with('flash_success', "Reparitita a fost calculata.");
             
 	}

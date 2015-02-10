@@ -1,7 +1,17 @@
 <?php
 
 class AsociatiesController extends BaseController {
-         protected $layout = 'layout';
+        protected $layout = 'layout';
+         
+        public function __construct() {
+            View::share('active_link', 'Asociatii');
+            $admin = $this->admin = Auth::user();
+            $this->beforeFilter(function() use($admin) {
+                if($admin->type !== 'super') {
+                    return Redirect::action('DashboardController@index')->with('flash_warning', 'Permission denied.');
+                }
+            });
+	}
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -80,13 +90,15 @@ class AsociatiesController extends BaseController {
 	{
 		$input = Input::all();
                 $asociatie = Asociatie::find($id);
-                $asociatie->consum_apa = empty($input['consum_apa'])? false: true;
-                $asociatie->consum_caldura = empty($input['consum_caldura'])? false: true;
+                $asociatie->fill($input);
+                //$asociatie->consum_apa = empty($input['consum_apa'])? false: true;
+                //$asociatie->consum_caldura = empty($input['consum_caldura'])? false: true;
 		$asociatie->save();
 		
 		//return Redirect::action('Calcul_asociatiesController@index')->with('asociatie_id', $id);
-                return Redirect::action('Calcul_asociatiesController@index')->with('flash_info', 'Setari salvate.');
-                //return
+                //return Redirect::action('Calcul_asociatiesController@index')->with('flash_info', 'Setari salvate.');
+                return Redirect::action('AsociatiesController@index')->with('flash_info', 'Setari salvate.');
+
 	}
 
 	/**

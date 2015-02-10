@@ -2,6 +2,15 @@
 
 class Calcul_asociatiesController extends BaseController {
         protected $layout = 'layout';
+        public function __construct() {
+            View::share('active_link', 'Asociatii');
+            $admin = $this->admin = Auth::user();
+            $this->beforeFilter(function() use($admin) {
+                if($admin->type !== 'super') {
+//                    return Redirect::action('AdminsController@login')->with('flash_warning', 'Permission denied.');
+                }
+            });
+	}
 	/**
 	 * Display a listing of the resource.
 	 *
