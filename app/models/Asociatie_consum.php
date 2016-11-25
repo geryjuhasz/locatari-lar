@@ -6,14 +6,15 @@ class Asociatie_consum extends Eloquent {
 
 	public static $rules = array();
         
-        public function asociatie() {
+    public function asociatie() {
 		return $this->belongsTo('Asociatie', 'asociatie_id');
 	}
         
-         public function tipconsum() {
+    public function tipconsum() {
 		return $this->belongsTo('Tipconsum', 'tipconsum_id');
 	}
-        public function tipincapere() {
+    
+    public function tipincapere() {
 		return $this->belongsTo('Tipincapere', 'tipincapere_id');
         }
 }

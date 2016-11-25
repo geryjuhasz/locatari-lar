@@ -1,9 +1,14 @@
-/bootstrap/compiled.php
-/vendor
+vendor/
+node_modules/
+
+# Laravel 5 & Lumen specific
+public/storage
+storage/*.key
+.env.*.php
+.env.php
+.env
+
 composer.phar
 composer.lock
-.env.local.php
-.env.php
-.DS_Store
-Thumbs.db
+
 /nbproject
