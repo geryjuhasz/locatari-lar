@@ -1,15 +1,14 @@
 <?php
 
 class LocatarisController extends Controller {
-        protected $layout = 'layout';
-        public function __construct() {
-            View::share('active_link', 'Asociatii');
-            $admin = $this->admin = Auth::user();
-            $this->beforeFilter(function() use($admin) {
-                if($admin->type !== 'super') {
+	public function __construct() {
+        View::share('active_link', 'Asociatii');
+        $admin = $this->admin = Auth::user();
+        $this->beforeFilter(function() use($admin) {
+            if($admin->type !== 'super') {
 //                    return Redirect::action('AdminsController@login')->with('flash_warning', 'Permission denied.');
-                }
-            });
+            }
+        });
 	}
 	/**
 	 * Display a listing of the resource.
@@ -18,15 +17,14 @@ class LocatarisController extends Controller {
 	 */
 	public function index()
 	{
-            $scara_id = getInputOrSession('scara_id');
+        $scara_id = getInputOrSession('scara_id');
             //$bloc = Bloc::where('asociatie_id', '=', $asociatie_id )->get();
-            $locatari = $scara_id!='0' ? Locatari::where('scara_id', '=', $scara_id)->get(): Locatari::all();
 
-            return View::make('locataris.index')
+        $locatari = $scara_id!='0' ? Locatari::where('scara_id', '=', $scara_id)->get() : null;
+
+        return View::make('locataris.index')
 			->with('locatari', $locatari)
 			->with('scara_id', $scara_id);
-
-            //return View::make('locataris.index')->with('locatari', Locatari::all());
 	}
 
 	/**

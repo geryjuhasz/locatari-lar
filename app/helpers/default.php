@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Http\Request;
 
 //Taken from http://stackoverflow.com/a/3291689/762551
 function crypto_rand_secure($min, $max) {
@@ -28,26 +29,27 @@ function getToken($length=32) {
 }
 
 function getInputOrSession($var) {
+ 	
     if(Input::get($var)) {
-	$result = Input::get($var);
+		$result = Input::get($var);
         Session::put($var, $result);
     } else if(Session::get($var)) {
         $result = Session::get($var);
     } else {
-	$result = '0';
+		$result = '0';
     }
     return $result;
 }
 
 function getDateInputOrSession($var) {
     if(Input::get($var)) {
-	$result = Input::get($var);
+		$result = Input::get($var);
         Session::put($var, $result);
     } else if(Session::get($var)) {
-        $result = date_format(new Datetime(Session::get($var)), 'Y-m-d');
-                //new Datetime(Session::get($var));
+        $result = date_format(new Datetime(Session::get($var)), 'Y-m');
+        //new Datetime(Session::get($var));
     } else {
-	$result = date('Y-m-d H:i:s');
+		$result = date('Y-m');
     }
     return $result;
 }

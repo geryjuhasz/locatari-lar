@@ -2,7 +2,7 @@
 
 class Tiprepartitie extends Eloquent {
 	protected $guarded = array();
-        protected $table = 'tiprepartitie';
+    protected $table = 'tiprepartitie';
 
 	public static $rules = array();
 }

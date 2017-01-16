@@ -27,11 +27,11 @@
 			<div class="row">
 				<h1>Asociatie.ro</h1>
 			</div>
+			<div class="header-right">
+                @include('partials.header_selector')
+			</div>
 			<div class="header-left">
 				@include('partials.nav')
-			</div>
-                        <div class="header-right">
-                                @include('partials.header_selector')
 			</div>
 			<div class="row" id="content">
 				@include('partials.flash')

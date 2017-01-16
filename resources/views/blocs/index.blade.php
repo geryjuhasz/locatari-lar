@@ -1,7 +1,7 @@
-@extends('layout')
-@section('content')
+@extends ('layouts.dashboard')
+@section('page_heading','Administrare blocuri')
 
-<h2>Administrare blocuri</h2>
+@section('section')
 <div class="pull-right">
 	<a href="{{ URL::action('BlocsController@create') }}" class="btn btn-default">Adauga bloc</a>
 </div>

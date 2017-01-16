@@ -11,12 +11,4 @@ Form::macro('selectModel', function($model, $property, $selected, $name, $htmlPr
 	return Form::select($name, $arr, $selected, $htmlProperties);
 });
 
-Form::macro('selectSource', function($name, $selected, $htmlProperties, $zero = false) {
-	$arr = array();
-	if($zero) $arr['all'] = 'All';
-	$arr['organic'] = 'Organic'; $arr['import'] = 'Import';
-	
-	return Form::select($name, $arr, $selected, $htmlProperties);
-});
-
 

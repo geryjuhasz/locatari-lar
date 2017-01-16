@@ -1,7 +1,6 @@
 <?php
 
 class Cost_locatarisController extends Controller {
-        protected $layout = 'layout';
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -9,11 +8,11 @@ class Cost_locatarisController extends Controller {
 	 */
 	public function index()
 	{
-            $asociatie_id = getInputOrSession('asociatie_id');
+            $asociatie_id = Session::get('asociatie_id');
             //$calcul = $asociatie_id!='0' ? Calcul_asociatie::where('asociatie_id', '=', $asociatie_id)->get(): Calcul_asociatie::all();;
-            $luna = getDateInputOrSession('luna');
-            //$luna = date_format(new Datetime(getInputOrSession('luna')), 'Y-m-d');
-            
+            //$luna = getDateInputOrSession('luna');
+            $luna = date_format(new Datetime(getInputOrSession('luna')), 'Y-m-d');
+            //var_dump($luna);exit;
             
             //calculateRepartition($asociatie_id, $luna);
             //calculateCostLocatari($asociatie_id, $luna);
@@ -51,7 +50,7 @@ class Cost_locatarisController extends Controller {
         return View::make('cost_locataris.create');
 	}
 
-        public function calculate()
+    public function calculate()
 	{
             //return View::make('cost_locataris.index');
 	}
@@ -64,10 +63,12 @@ class Cost_locatarisController extends Controller {
 	public function store()
 	{
             $asociatie_id = getInputOrSession('asociatie_id');
-            $luna = getInputOrSession('luna');
-            
+            //$luna = getInputOrSession('luna');
+            $luna = date_format(new Datetime(getInputOrSession('luna')), 'Y-m-d');
+
             calculateRepartition($asociatie_id, $luna);
-            calculateCostLocatari($asociatie_id, $luna);
+            //exit;
+            //calculateCostLocatari($asociatie_id, $luna);
             
             return Redirect::action('Cost_locatarisController@index')->with('flash_success', "Reparitita a fost calculata.");
             

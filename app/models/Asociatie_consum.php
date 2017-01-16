@@ -2,7 +2,7 @@
 
 class Asociatie_consum extends Eloquent {
 	protected $guarded = array();
-        protected $table = 'asociatie_consum';
+    protected $table = 'asociatie_consum';
 
 	public static $rules = array();
         
@@ -14,7 +14,8 @@ class Asociatie_consum extends Eloquent {
 		return $this->belongsTo('Tipconsum', 'tipconsum_id');
 	}
     
-    public function tipincapere() {
-		return $this->belongsTo('Tipincapere', 'tipincapere_id');
-        }
+    public function tipcontor() {
+		return $this->belongsTo('Tipcontor', 'tipcontor_id');
+    }
+    
 }

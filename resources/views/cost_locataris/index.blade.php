@@ -1,5 +1,7 @@
-@extends('layout')
-@section('content')
+@extends ('layouts.dashboard')
+@section('page_heading','Calcul asociatie')
+
+@section('section')
 <?php
 $action = 'Cost_locatarisController@store';
 $method = 'POST';
@@ -10,8 +12,6 @@ $asociatie_id = getInputOrSession('asociatie_id');
 //var_dump($costuri);
 //die();
 ?>
-
-<h2>Calcul asociatie:</h2>
 {{ Form::open(array('action' => $action, 'method' => $method)) }}
 <div class="col-3">
         {{ Form::label('luna', '', array('class' => 'form-label')) }}
@@ -24,11 +24,9 @@ $asociatie_id = getInputOrSession('asociatie_id');
 </div>
 
 <br/>
-<br/>
-<br/>
-
 
 @foreach($costuri as $cost)
     @include('cost_locataris.cost_scara', array('cost_scara'=>$cost['cost'], 'denumire_scara'=>$cost['scara']))
 @endforeach
+
 @stop

@@ -1,3 +1,5 @@
+@extends ('layouts.dashboard')
+@section('page_heading', 'Setari asociatie')
 <?php
 if(!empty($calculasociatie)) {
 	$action = array('Calcul_asociatiesController@update', $calculasociatie->id);
@@ -18,7 +20,7 @@ $tipcalculrepartitie = Tipcalculrepartitie::lists('denumire', 'id');
 $tiprepartitie = Tiprepartitie::lists('denumire', 'id');
 
 ?>
-@section('content')
+@section('section')
 <div class="col-4">
 	<h3>{{ $header }}</h3>
 	{{ Form::open(array('action' => $action, 'method' => $method)) }}

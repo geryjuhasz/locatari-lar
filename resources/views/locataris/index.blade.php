@@ -1,7 +1,8 @@
-@extends('layout')
-@section('content')
+@extends ('layouts.dashboard')
+@section('page_heading','Locatari')
 
-<h2>Administrare locatari</h2>
+@section('section')
+
 <div class="pull-right">
 	<a href="{{ URL::action('LocatarisController@create') }}" class="btn btn-default">Adauga locatar</a>
 </div>
@@ -27,6 +28,7 @@
                                 <td>{{ $lloc->suprafata_mp }}</td>
                                 <td>{{ $lloc->nr_persoane }}</td>
 				<td><a href="{{ URL::action('LocatarisController@edit', $lloc->id) }}">Edit</a></td>
+				<td><a href="{{ URL::action('LocatarContor@index', array('locatari_id' => $lloc->id)) }}">Contoare</a></td>
 				<td>
 					{{ Form::open(array('action' => array('LocatarisController@destroy', $lloc->id), 'method' => 'delete')) }}
 						<button type="submit" class="btn-link btn-confirm-submit">Delete</button>
