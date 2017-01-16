@@ -1,5 +1,7 @@
-@extends('layout')
-@section('content')
+@extends ('layouts.dashboard')
+@section('page_heading','Administratori')
+
+@section('section')
 <div class="col-12">
 	<a href="{{ URL::action('AdminsController@create') }}" class="btn btn-default">Add admin</a>
 	<table class="table table-striped table-hover">

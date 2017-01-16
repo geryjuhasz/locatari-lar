@@ -1,19 +1,20 @@
-<br/>
-<h3>{{$denumire_scara}}</h3>
+
+@section ('{{$denumire_scara}}_panel_title', 'Avizier - {{$denumire_scara}}')
+@section ('{{$denumire_scara}}_panel_body')
 <table class="table table-striped table-hover">
 	<tr>
 			<th>Locatar</th>
 			<th>Cheltuieli pe pers.</th>
-                        <th>Apa rece</th>
-                        <th>Dif apa rece</th>
+            <th>Apa rece</th>
+            <th>Dif apa rece</th>
 			<th>Apa calda</th>
-                        <th>Dif apa calda</th>
-                        <th>Cheltuieli CPI</th>
-                        <th>Cheltuieli specifice</th>
-                        <th>Taxa elsaco</th>
-                        <th>Caldura</th>
-                        <th>Fond rulment</th> 
-                        <th>Total chelt.</th>
+            <th>Dif apa calda</th>
+            <th>Cheltuieli CPI</th>
+            <th>Cheltuieli specifice</th>
+            <th>Taxa elsaco</th>
+            <th>Caldura</th>
+            <th>Fond rulment</th> 
+            <th>Total chelt.</th>
                         
         </tr>
        
@@ -37,3 +38,5 @@
 	</tbody>
         
 </table>
+@endsection
+@include('widgets.panel', array('class'=>'primary', 'header'=>true, 'as'=>'{{$denumire_scara}}'))

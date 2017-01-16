@@ -19,6 +19,7 @@ class Asociatie_consumsController extends Controller {
 	 */
 	public function create()
 	{
+        $asociatie_id = getInputOrSession('asociatie_id');
         return View::make('asociatie_consums.create');
 	}
 
@@ -29,7 +30,13 @@ class Asociatie_consumsController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		$input = Input::all();
+		$asociatie_consum = new Asociatie_consum();
+		$asociatie_consum->fill($input);
+                
+		$asociatie_consum->save();
+		
+		return Redirect::action('Calcul_asociatiesController@index')->with('flash_success', "Calcul salvat.");
 	}
 
 	/**
@@ -51,7 +58,9 @@ class Asociatie_consumsController extends Controller {
 	 */
 	public function edit($id)
 	{
-        return View::make('asociatie_consums.edit');
+		$asociatie_id = getInputOrSession('asociatie_id');
+        return View::make('asociatie_consums.create')
+			->with('consumasociatie', Asociatie_consum::find($asociatie_id));
 	}
 
 	/**
@@ -73,7 +82,8 @@ class Asociatie_consumsController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		Asociatie_consum::find($id)->delete();
+		return Redirect::action('Calcul_asociatiesController@index')->with('flash_warning', "Contor sters.");
 	}
 
 }

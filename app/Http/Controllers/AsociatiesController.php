@@ -19,8 +19,8 @@ class AsociatiesController extends Controller {
 	 */
 	public function index()
 	{
-            Session::forget('asociatie_id');
-            return View::make('asociaties.index')->with('asociatie', Asociatie::all());
+        Session::forget('asociatie_id');
+        return View::make('asociaties.index')->with('asociatie', Asociatie::all());
 	}
 
 	/**
@@ -80,6 +80,17 @@ class AsociatiesController extends Controller {
 		->with('asociatie', Asociatie::find($id));
 	}
 
+	public function select()
+	{
+		Session::forget('asociatie_id', 'asociatie', 'bloc_id', 'bloc', 'scara_id', 'scara');
+		//var_dump(Session::all());exit();
+		if (Input::get('asociatie_id')) {
+			Session::put('asociatie_id', Input::get('asociatie_id'));
+		}
+		$redir_url = Session::get('redir_url', 'admin');
+        Session::forget('redir_url');
+        return Redirect::to($redir_url);
+	}
 	/**
 	 * Update the specified resource in storage.
 	 *
@@ -109,7 +120,7 @@ class AsociatiesController extends Controller {
 	 */
 	public function destroy($id)
 	{
-                Asociatie::find($id)->delete();
+        Asociatie::find($id)->delete();
 		return Redirect::action('AsociatiesController@index')->with('flash_warning', "Asociatia a fost stearsa.");
 	}
 

@@ -1,4 +1,6 @@
 <?php
+use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
 
 class DatabaseSeeder extends Seeder {
 
@@ -9,14 +11,14 @@ class DatabaseSeeder extends Seeder {
 	 */
 	public function run()
 	{
-		Eloquent::unguard();
+		Model::unguard();
 
 		//$this->call('UserTableSeeder');
 		//$this->call('AsociatieTableSeeder');
 		//$this->call('BlocTableSeeder');
-                //$this->call('ScaraTableSeeder');
+        //$this->call('ScaraTableSeeder');
 		//$this->call('TipcalculrepartitieTableSeeder');
-		$this->call('TipcheltuieliTableSeeder');
+		//$this->call('TipcheltuieliTableSeeder');
 		//$this->call('TipconsumTableSeeder');
 		//$this->call('TipincapereTableSeeder');
 		//$this->call('TiprepartitieTableSeeder');
@@ -27,8 +29,10 @@ class DatabaseSeeder extends Seeder {
 		//$this->call('CeltuielisTableSeeder');
 		//$this->call('CheltuielisTableSeeder');
 		//$this->call('Cost_locatarisTableSeeder');
-                //$this->call('UserTableSeeder');
+        //$this->call('UserTableSeeder');
 		//$this->call('Asociatie_consumsTableSeeder');
+		//$this->call('TipcontorTableSeeder');
+		$this->call('TipdocumentTableSeeder');
 	}
 
 }

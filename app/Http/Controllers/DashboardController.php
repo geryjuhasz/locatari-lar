@@ -1,15 +1,16 @@
 <?php
 
 class DashboardController extends Controller {
-        protected $layout = 'layout';   
-        public function __construct() {
-            View::share('active_link', 'Dashboard');
-            $admin = $this->admin = Auth::user();
-            $this->beforeFilter(function() use($admin) {
-              if($admin->type !== 'super') {
-//                    return Redirect::action('AdminsController@login')->with('flash_warning', 'Permission denied.');
-              }
-            });
+    protected $layout = 'layout';   
+    
+    public function __construct() {
+        View::share('active_link', 'Dashboard');
+        $admin = $this->admin = Auth::user();
+        $this->beforeFilter(function() use($admin) {
+        	if($admin->type !== 'super') {
+			//                    return Redirect::action('AdminsController@login')->with('flash_warning', 'Permission denied.');
+        	}
+      	});
 	}
 	/**
 	 * Display a listing of the resource.
@@ -19,7 +20,7 @@ class DashboardController extends Controller {
 	public function index()
 	{
 		//
-            return View::make('dashboards.index');
+        return View::make('dashboards.index');
 	}
 
 	/**

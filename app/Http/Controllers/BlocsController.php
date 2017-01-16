@@ -1,9 +1,9 @@
 <?php
 
 class BlocsController extends Controller {
-        protected $layout = 'layout';
+    protected $layout = 'layout';
         
-        public function __construct() {
+    public function __construct() {
             View::share('active_link', 'Asociatii');
             $admin = $this->admin = Auth::user();
             $this->beforeFilter(function() use($admin) {
@@ -19,10 +19,10 @@ class BlocsController extends Controller {
 	 */
 	public function index()
 	{
-            $asociatie_id = getInputOrSession('asociatie_id');
+    	$asociatie_id = getInputOrSession('asociatie_id');
             //$bloc = Bloc::where('asociatie_id', '=', $asociatie_id )->get();
-            $bloc = $asociatie_id!='0' ? Bloc::where('asociatie_id', '=', $asociatie_id)->get(): Bloc::all();
-            return View::make('blocs.index')
+        $bloc = $asociatie_id!='0' ? Bloc::where('asociatie_id', '=', $asociatie_id)->get(): Bloc::all();
+        return View::make('blocs.index')
 			->with('bloc', $bloc)
 			->with('asociatie_id', $asociatie_id);
 	}
@@ -44,7 +44,7 @@ class BlocsController extends Controller {
 	 */
 	public function store()
 	{
-                $input = Input::all();
+        $input = Input::all();
 		$validator = Validator::make($input, array(
 			'denumire' => 'required',
 			'asociatie_id' => 'required|exists:asociatie,id'

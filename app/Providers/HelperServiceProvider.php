@@ -1,6 +1,7 @@
 <?php namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 
 class HelperServiceProvider extends ServiceProvider {
 
@@ -12,6 +13,10 @@ class HelperServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		//
+			//	var_dump(Auth::user());die();
+		
+		//$asociatie_id = getInputOrSession('asociatie_id');
+		//View::share('asociatie_id', $asociatie_id);
 	}
 
 	/**

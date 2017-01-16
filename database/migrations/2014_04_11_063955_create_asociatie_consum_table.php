@@ -15,8 +15,8 @@ class CreateAsociatieConsumTable extends Migration {
 		Schema::create('asociatie_consum', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('asociatie_id');
-                        $table->integer('tipconsum_id');
-                        $table->integer('tipincapere_id');
+            $table->integer('tipconsum_id');
+            $table->integer('tipincapere_id');
 			$table->timestamps();
 		});
 	}

@@ -1,15 +1,14 @@
 <?php
 
 class Calcul_asociatiesController extends Controller {
-        protected $layout = 'layout';
-        public function __construct() {
-            View::share('active_link', 'Asociatii');
-            $admin = $this->admin = Auth::user();
-            $this->beforeFilter(function() use($admin) {
-                if($admin->type !== 'super') {
+    public function __construct() {
+        View::share('active_link', 'Asociatii');
+        $admin = $this->admin = Auth::user();
+        $this->beforeFilter(function() use($admin) {
+            if($admin->type !== 'super') {
 //                    return Redirect::action('AdminsController@login')->with('flash_warning', 'Permission denied.');
-                }
-            });
+        	}
+        });
 	}
 	/**
 	 * Display a listing of the resource.
@@ -18,12 +17,16 @@ class Calcul_asociatiesController extends Controller {
 	 */
 	public function index()
 	{
-            $asociatie_id = getInputOrSession('asociatie_id');
-            //$bloc = Bloc::where('asociatie_id', '=', $asociatie_id )->get();
-            $calcul = $asociatie_id!='0' ? Calcul_asociatie::where('asociatie_id', '=', $asociatie_id)->get(): Calcul_asociatie::all();;
-            return View::make('calcul_asociaties.index')
-			->with('calcul', $calcul)
-			->with('asociatie_id', $asociatie_id);
+        $asociatie_id = getInputOrSession('asociatie_id');
+        View::share('asociatie_id', $asociatie_id);
+        
+        $calcul = $asociatie_id!='0' ? Calcul_asociatie::where('asociatie_id', '=', $asociatie_id)->get(): Calcul_asociatie::all();;
+        View::share('calcul', $calcul);
+
+        $consum = Asociatie_consum::where('asociatie_id', '=', $asociatie_id)->get();
+        View::share('consum', $consum);
+        
+        return View::make('calcul_asociaties.index');
 	}
 
         
@@ -35,9 +38,9 @@ class Calcul_asociatiesController extends Controller {
 	 */
 	public function create()
 	{
-            $asociatie_id = getInputOrSession('asociatie_id');
+        $asociatie_id = getInputOrSession('asociatie_id');
             
-            return View::make('calcul_asociaties.create')
+        return View::make('calcul_asociaties.create')
                     ->with('asociatie_id', $asociatie_id);
 	}
 

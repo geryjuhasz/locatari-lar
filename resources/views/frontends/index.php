@@ -108,8 +108,8 @@
 							Oradea, Romania
 							<br>
 							Email:
-							<a href="#">
-								agilesoft80@gmail.com
+							<a href="mailto:office@asociatie-online.ro">
+								office@asociatie-online.ro
 							</a>
 						</address>
 					</div>
@@ -129,8 +129,8 @@
 							<!-- start: TOP BAR CALL US -->
 							<div class="callus">
 								Mail:
-								<a href="mailto:agilesoft80@gmail.com">
-									agilesoft80@gmail.com
+								<a href="mailto:office@asociatie-online.ro">
+									office@asociatie-online.ro
 								</a>
 							</div>
 							<!-- end: TOP BAR CALL US -->
@@ -196,7 +196,7 @@
 								<!--<a class="dropdown-toggle" href="#" data-toggle="dropdown" data-hover="dropdown">
 									Administratori <b class="caret"></b>
 								</a>-->
-                                                                <a href="./login_admin">
+								<a href="./login_admin">
 									Administratori
 								</a>
 								<!--<ul class="dropdown-menu">
@@ -232,209 +232,49 @@
 									</li>
 								</ul>-->
 							</li>
-							<!--<li class="dropdown mega-menu">
-								<a class="dropdown-toggle" href="#" data-toggle="dropdown" data-hover="dropdown">
-									Features <b class="caret"></b>
-								</a>
-								<ul class="dropdown-menu">
-									<li>
-										<div class="mega-menu-content">
-											<div class="row">
-												<div class="col-sm-3">
-													<ul class="sub-menu">
-														<li>
-															<span class="mega-menu-sub-title">Main Features</span>
-															<ul class="sub-menu">
-																<li>
-																	<a href="features_icons.html">
-																		Icons
-																	</a>
-																</li>
-																<li>
-																	<a href="features_buttons.html">
-																		Buttons
-																	</a>
-																</li>
-																<li>
-																	<a href="features_animations.html">
-																		Animations
-																	</a>
-																</li>
-																<li>
-																	<a href="features_typograpy.html">
-																		Typograpy
-																	</a>
-																</li>
-																<li>
-																	<a href="features_grid_system.html">
-																		Grid System
-																	</a>
-																</li>
-															</ul>
-														</li>
-													</ul>
-												</div>
-												<div class="col-sm-3">
-													<ul class="sub-menu">
-														<li>
-															<span class="mega-menu-sub-title">Headers and Footers</span>
-															<ul class="sub-menu">
-																<li>
-																	<a href="index.html">
-																		Header Version 1
-																	</a>
-																</li>
-																<li>
-																	<a href="index_header_2.html">
-																		Header Version 2
-																	</a>
-																</li>
-																<li>
-																	<a href="index_header_3.html">
-																		Header Version 3
-																	</a>
-																</li>
-																<li>
-																	<a href="index.html#footer">
-																		Footer Version 1
-																	</a>
-																</li>
-																<li>
-																	<a href="index_footer_2.html#footer">
-																		Footer Version 2
-																	</a>
-																</li>
-															</ul>
-														</li>
-													</ul>
-												</div>
-												<div class="col-sm-3">
-													<ul class="sub-menu">
-														<li>
-															<span class="mega-menu-sub-title">Extra</span>
-															<ul class="sub-menu">
-																<li>
-																	<a href="extra_search_result.html">
-																		Search Result
-																	</a>
-																</li>
-																<li>
-																	<a href="extra_pricing_table.html">
-																		Pricing Tables
-																	</a>
-																</li>
-																<li>
-																	<a href="extra_404.html">
-																		404
-																	</a>
-																</li>
-																<li>
-																	<a href="extra_500.html">
-																		500
-																	</a>
-																</li>
-															</ul>
-														</li>
-													</ul>
-												</div>
-												<div class="col-sm-3">
-													<ul class="sub-menu">
-														<li>
-															<span class="mega-menu-sub-title">Blog</span>
-															<ul class="sub-menu">
-																<li>
-																	<a href="blog_page.html">
-																		Blog Page
-																	</a>
-																</li>
-																<li>
-																	<a href="blog_post.html">
-																		Blog Post
-																	</a>
-																</li>
-															</ul>
-														</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</li>
-								</ul>
-							</li>-->
-							<!--<li class="dropdown">
-								<a class="dropdown-toggle" href="#" data-toggle="dropdown" data-hover="dropdown">
-									Portfolio <b class="caret"></b>
-								</a>
-								<ul class="dropdown-menu">
-									<li>
-										<a href="portfolio_example1.html">
-											4 Columns Portfolio
-										</a>
-									</li>
-									<li>
-										<a href="portfolio_example2.html">
-											3 Columns Portfolio
-										</a>
-									</li>
-									<li>
-										<a href="portfolio_example3.html">
-											2 Columns Portfolio
-										</a>
-									</li>
-									<li>
-										<a href="portfolio_item.html">
-											Portfolio Item
-										</a>
-									</li>
-								</ul>
-							</li>-->
-							<li>
-								<a target="_blank" href="../../admin/clip-one/index.html">
-									Locatari
-								</a>
-							</li>
-                                                        <li>
-								<a target="_blank" href="../../admin/clip-one/index.html">
-									Servicii
-								</a>
-							</li>
-							<li class="menu-search">
-								<!-- start: SEARCH BUTTON -->
-								<a href="#" data-placement="bottom" data-toggle="popover">
-									<i class="clip-search-3"></i>
-								</a>
-								<!-- end: SEARCH BUTTON -->
-								<!-- start: SEARCH POPOVER -->
-								<div class="popover bottom search-box">
-									<div class="arrow"></div>
-									<div class="popover-content">
-										<!-- start: SEARCH FORM -->
-										<form class="" id="searchform" action="#">
-											<div class="input-group">
-												<input type="text" class="form-control" placeholder="Search">
-												<span class="input-group-btn">
-													<button class="btn btn-main-color btn-squared" type="button">
-														<i class="clip-search-3"></i>
-													</button> </span>
-											</div>
-										</form>
-										<!-- end: SEARCH FORM -->
+							
+				<li>
+					<a href="./login">
+						Locatari
+					</a>
+				</li>
+                <li class="menu-search">
+					<!-- start: SEARCH BUTTON -->
+					<a href="#" data-placement="bottom" data-toggle="popover">
+						<i class="clip-search-3"></i>
+					</a>
+					<!-- end: SEARCH BUTTON -->
+					<!-- start: SEARCH POPOVER -->
+					<div class="popover bottom search-box">
+						<div class="arrow"></div>
+							<div class="popover-content">
+								<!-- start: SEARCH FORM -->
+								<form class="" id="searchform" action="#">
+									<div class="input-group">
+										<input type="text" class="form-control" placeholder="Search">
+										<span class="input-group-btn">
+										<button class="btn btn-main-color btn-squared" type="button">
+											<i class="clip-search-3"></i>
+										</button> </span>
 									</div>
-								</div>
-								<!-- end: SEARCH POPOVER -->
-							</li>
-						</ul>
-					</div>
-				</div>
-				<!-- end: TOP NAVIGATION CONTAINER -->
+								</form>
+							<!-- end: SEARCH FORM -->
+							</div>
+						</div>
+						<!-- end: SEARCH POPOVER -->
+					</li>
+				</ul>
 			</div>
-		</header>
-		<!-- end: HEADER -->
-		<!-- start: MAIN CONTAINER -->
-		<div class="main-container">
-			<!-- start: REVOLUTION SLIDERS -->
-			<section class="fullwidthbanner-container">
-				<div class="fullwidthabnner">
+		</div>
+		<!-- end: TOP NAVIGATION CONTAINER -->
+	</div>
+</header>
+<!-- end: HEADER -->
+<!-- start: MAIN CONTAINER -->
+<div class="main-container">
+	<!-- start: REVOLUTION SLIDERS -->
+		<section class="fullwidthbanner-container">
+			<div class="fullwidthabnner">
 					<ul>
 						<!-- start: FIRST SLIDE -->
 						<li data-transition="fade" data-slotamount="7" data-masterspeed="1500" >
@@ -1247,14 +1087,14 @@
 								</li>
 								<li>
 									<p>
-										<i class="fa fa-phone"></i><strong>Telefon:</strong> (123) 456-7890
+										<i class="fa fa-phone"></i><strong>Telefon:</strong> (0731) 212-237
 									</p>
 								</li>
 								<li>
 									<p>
 										<i class="fa fa-envelope"></i><strong>Email:</strong>
-										<a href="mailto:agilesoft80@gmail.com">
-											agilesoft80@gmail.com
+										<a href="mailto:office@asociatie-online.ro">
+											office@asociatie-online.ro
 										</a>
 									</p>
 								</li>

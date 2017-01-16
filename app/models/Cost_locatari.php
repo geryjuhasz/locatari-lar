@@ -2,12 +2,12 @@
 
 class Cost_locatari extends Eloquent {
 	protected $guarded = array();
-        protected $table = 'cost_locatari';
+    protected $table = 'cost_locatari';
 
 	public static $rules = array();
         
-        public function locatari() {
-            return $this->belongsTo('locatari', 'locatari_id');
+    public function locatari() {
+        return $this->belongsTo('locatari', 'locatari_id');
 	}
         
         public function scopeFromScara($query, $scara_id)
